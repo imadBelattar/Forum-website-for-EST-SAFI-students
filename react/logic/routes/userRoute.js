@@ -1,8 +1,13 @@
 const {Router} = require('express')
-const { getUsers } = require("../controllers/userController")
+const { authentication, getUsers } = require("../controllers/userController")
+const verifyJWT = require('../middleware/verifyJWT')
 
 const router = Router()
 
-router.get("/api/users", getUsers)
+//the routes to handle the send requests :
+//router.get("/users", getUsers)
+router.post("/autentication", authentication)
+router.get("/jibUsers", verifyJWT, getUsers)
+//router.get("/jibUsers", getUsers)
 
 module.exports = router
