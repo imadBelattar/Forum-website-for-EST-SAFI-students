@@ -1,0 +1,19 @@
+.unfound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the parent height to 100vh */
+  }
+  
+  .unfound .wrapper {
+    border: 2px solid black;
+    background-color: #ff2020de;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%; /* Use max-height instead of height */
+    border-radius: 10px;
+  }
+  
+  

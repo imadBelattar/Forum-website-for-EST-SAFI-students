@@ -10,14 +10,26 @@ const app = express();
 const PORT = process.env.PORT | 5000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 //server api routes
 app.use("/api", require("./routes/logoutRoute"));
 app.use("/api", userRoutes);
 app.use("/api", require("./routes/refreshTokenRoute"));
-//middleware for cookies
-
+//this is just for test the are cookies stored in browser
+app.get("/api/testCookieALMIGHTY", (req, res) => {
+  res.cookie("test", "tested-cookie", {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    domain: "localhost",
+  });
+  res.status(201).json({ message: "I may sent a cookie included" });
+});
 //for undefined api routes :
 
 app.get("*", (req, res) => {

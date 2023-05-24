@@ -1,29 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ setToken }) => {
+const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [loginMsg, setLoginMsg] = useState("");
+  const [passwordMsg, setPasswordMsg] = useState("");
+  const [retryMsg, setRetryMsg] = useState("");
+  const navigate = useNavigate();
+  //handling the form submittion event
+  const isAutentified = async (e) => {
+    setLoginMsg("");
+    setPasswordMsg("");
+    setRetryMsg("");
 
-  /*   useEffect(() => {
-    axios.get(`${baseURL}/authentication`);
-  }, []); */
-
-  const isAutentified = () => {
+    e.preventDefault();
     const credentials = { login, password };
-    console.log(`form submitted...`);
-    axios
-      .post(`${baseURL}/autentication`, credentials)
+    if (login && password) {
+      console.log("form has submitted the credentials");
+    } else {
+      if (!login) {
+        setLoginMsg("login is required !");
+        setPassword("")
+      }
+      if (!password) {
+        setPasswordMsg("password is required !");
+
+      }
+      return;
+    }
+    await axios
+      .post(`${baseURL}/autentication`, credentials, {
+        withCredentials: true,
+      })
       .then((response) => {
-        if (response.data.accessToken) {
-          setToken(response.data.accessToken);
+        const recievedAccessToken = response.data.accessToken;
+        if (recievedAccessToken) {
+          localStorage.setItem("token", recievedAccessToken);
+          //get redirected to the /home to see the home page
+          navigate("/home");
         }
-        alert(response.data.message);
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        setRetryMsg("password or login is incorrect !!");
+        setPassword("")
+        setLogin("")
+        console.error(`Error while user authentication : ${error}`);
       });
   };
 
@@ -32,6 +57,7 @@ const Login = ({ setToken }) => {
       <h2>Login</h2>
       <form className="loginForm" onSubmit={isAutentified}>
         <div className="mb-3">
+          <h5 className="msg">{retryMsg}</h5>
           <label htmlFor="username" className="form-label labelUsername">
             Username
           </label>
@@ -45,6 +71,7 @@ const Login = ({ setToken }) => {
               setLogin(e.target.value);
             }}
           />
+          <p className="msg">{loginMsg}</p>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label labelPassword">
@@ -60,6 +87,7 @@ const Login = ({ setToken }) => {
               setPassword(e.target.value);
             }}
           />
+          <p className="msg">{passwordMsg}</p>
         </div>
         <button type="submit" className="btn btn-danger signIn">
           Sign In

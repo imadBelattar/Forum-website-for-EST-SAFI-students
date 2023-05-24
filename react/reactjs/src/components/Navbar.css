@@ -3,3 +3,18 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-bottom: 0.5px solid #b46215;
 }
+.search-input{
+    border-radius: 0 !important;
+    height: 42px;
+    width: 60% !important;
+    margin-left: 90px !important;
+}
+.logout{
+    margin-left: 20px !important;
+    height: 45px !important;
+    background-color: rgb(34, 28, 28) !important;
+}
+.logout:hover{
+    transition: .6s;
+    background-color: rgb(69, 69, 69) !important;
+}
