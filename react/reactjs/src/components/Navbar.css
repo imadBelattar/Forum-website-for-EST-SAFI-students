@@ -2,6 +2,11 @@
     background-color: #F2A154 !important;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-bottom: 0.5px solid #b46215;
+/*     position: fixed !important;
+    z-index: 9999 !important;
+    width: 100% !important;
+    top: 0 !important;
+ */
 }
 .search-input{
     border-radius: 0 !important;
@@ -10,11 +15,16 @@
     margin-left: 90px !important;
 }
 .logout{
-    margin-left: 20px !important;
+    margin-left: 30px !important;
     height: 45px !important;
     background-color: rgb(34, 28, 28) !important;
+    width: 60px !important;
 }
 .logout:hover{
     transition: .6s;
     background-color: rgb(69, 69, 69) !important;
+}
+.activated{
+    color: brown !important;
+    font-weight: bold !important;
 }

@@ -1,0 +1,86 @@
+/* .questions h3{
+
+} */
+.questions{
+    margin: 100px;
+    margin-top: 0;
+}
+.questionsHeader{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    margin-left: 10px;
+}
+.questionsHeader .btn-primary{
+    height: 50px !important;
+    font-size: 80% !important;
+}
+.table{
+    margin-top: 30px;
+}
+.table .emptyTr{
+height: 35px !important;
+}
+.table .questionTr{
+    height: 80px !important;
+}
+.table .questionTr td{
+    color: rgb(3, 129, 219) !important;
+    font-weight: 400;
+    transition: .5s;
+}
+.table .questionTr td:hover{
+    color: rgb(1, 77, 131) !important;
+    cursor: pointer;
+    transition: color .5s;
+}
+.table ul{
+    list-style-type: none;
+}
+.tags{
+    margin-top: 15px !important;
+}
+.btn-outline-primary{
+    font-size: 65% !important;
+    width: fit-content !important;
+}
+.tagx{
+    margin-left: 5px !important;
+}
+
+
+.table .threeStates ul{
+    font-family: monospace;
+    font-size: 85%;
+    color: rgb(255, 0, 85);
+
+}
+
+.table ul:hover{
+    cursor: default;
+}
+.threeStates{
+    padding-right: 0 !important;
+    width: 150px !important;
+}
+.questionStm{
+    padding-top: 15px !important;
+   padding-left: 0 !important;
+   font-size: 110%;
+}
+.QuestionsGroups{
+    height: fit-content !important;
+    margin-bottom: 0 !important;
+}
+
+.QuestionsGroups .info1{
+    margin-left: 71%;
+}
+.QuestionsGroups .info2,.QuestionsGroups .info3{
+    margin-left: 6px !important;
+}
+.btn-outline-secondary{
+    border-radius: 0 !important;
+}

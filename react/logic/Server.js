@@ -18,9 +18,10 @@ app.use(
 );
 app.use(cookieParser());
 //server api routes
-app.use("/api", require("./routes/logoutRoute"));
 app.use("/api", userRoutes);
+app.use("/api", require("./routes/questionRoute"));
 app.use("/api", require("./routes/refreshTokenRoute"));
+app.use("/api", require("./routes/logoutRoute"));
 //this is just for test the are cookies stored in browser
 app.get("/api/testCookieALMIGHTY", (req, res) => {
   res.cookie("test", "tested-cookie", {

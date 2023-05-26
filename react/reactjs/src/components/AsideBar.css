@@ -1,0 +1,57 @@
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: #314E52;
+    color: #fff;
+    padding-top: 20px;
+    position: fixed;
+    transition: width .3s ease;
+  }
+  
+  .sidebar-header {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  
+  .sidebar-header h3 {
+    margin: 0;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar-menu a {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  .sidebar-icon {
+    margin-right: 10px;
+    transition: font-weight 0.4s ease;
+  }
+  
+  /* Media Query for Small Screens */
+  @media (max-width: 768px) {
+    .sidebar-menu span , .sidebar h5{
+      display: none; /* Hide the text */
+    }
+    .sidebar{
+        width: 20% !important;
+        align-items: center !important;
+    }
+    .sidebar-icon{
+        font-size: 150% !important;
+        margin: auto;
+    }
+  }
+  

@@ -17,6 +17,48 @@ router.get("/getUserQuestions", verifyJWT, (req, res) => {
     {
       statement: "what is the role of malok() in c++ ?",
       description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
+    },    {
+      statement: "what is the role of malok() in c++ ?",
+      description: "please I need a response because I am struggling in my tests",
     },
   ]);
 });

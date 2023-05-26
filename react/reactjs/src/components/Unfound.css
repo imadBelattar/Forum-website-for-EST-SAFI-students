@@ -3,17 +3,22 @@
     justify-content: center;
     align-items: center;
     height: 100vh; /* Set the parent height to 100vh */
+    color: red;
   }
-  
+  h1{
+    font-weight: bold !important;
+    margin-top: 10px !important;
+  }
   .unfound .wrapper {
-    border: 2px solid black;
-    background-color: #ff2020de;
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 50%;
-    height: 50%; /* Use max-height instead of height */
-    border-radius: 10px;
+    height: 100%; /* Use max-height instead of height */
+    background-image: url(../utils/img/NOT-FOUND.jpg);
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
   }
-  
+  body{
+    background-color: #ffffff !important;
+  }
   

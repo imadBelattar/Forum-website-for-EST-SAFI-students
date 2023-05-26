@@ -24,11 +24,10 @@ const Login = () => {
     } else {
       if (!login) {
         setLoginMsg("login is required !");
-        setPassword("")
+        setPassword("");
       }
       if (!password) {
         setPasswordMsg("password is required !");
-
       }
       return;
     }
@@ -40,14 +39,15 @@ const Login = () => {
         const recievedAccessToken = response.data.accessToken;
         if (recievedAccessToken) {
           localStorage.setItem("token", recievedAccessToken);
+          localStorage.setItem("name", response.data.name);
           //get redirected to the /home to see the home page
           navigate("/home");
         }
       })
       .catch((error) => {
         setRetryMsg("password or login is incorrect !!");
-        setPassword("")
-        setLogin("")
+        setPassword("");
+        setLogin("");
         console.error(`Error while user authentication : ${error}`);
       });
   };

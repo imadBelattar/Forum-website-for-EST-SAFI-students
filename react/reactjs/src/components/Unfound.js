@@ -5,7 +5,7 @@ const Unfound = () => {
   return (
     <div className="unfound">
       <div className="wrapper">
-        <h2>UNFOUND 404</h2> 
+        <h1>NOT FOUND 404</h1> 
       </div>
     </div>
   );

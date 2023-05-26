@@ -1,17 +1,40 @@
-import React from 'react';
-import './AsideBar.css';
-const AsideBar = () => {
+import React from "react";
+import "./AsideBar.css";
+import { FaHome, FaInfoCircle, FaCog, FaEnvelope } from 'react-icons/fa';
+
+const AsideBar = ({name}) => {
   return (
-    <aside>
-     <ul>
-        <li>test !</li>
-        <li>test !</li>
-        <li>test !</li>
-        <li>test !</li>
-        <li>test !</li>
-        <li>test !</li>
-     </ul>
-    </aside>
+<div className="sidebar">
+      <div className="sidebar-header">
+        <h5>Mr. {name}</h5>
+      </div>
+      <ul className="sidebar-menu">
+        <li>
+          <a href="#">
+            <FaHome className="sidebar-icon" />
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <FaInfoCircle className="sidebar-icon" />
+            <span>About</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <FaCog className="sidebar-icon" />
+            <span>Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <FaEnvelope className="sidebar-icon" />
+            <span>Contact</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   );
 };
 

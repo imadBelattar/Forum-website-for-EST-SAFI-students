@@ -34,7 +34,7 @@ const authentication = async (req, res) => {
     if (user.password !== password) {
       return res.status(401).json({ message: "Invalid password" });
     }
-    userClone = { fullName: user.full_name, login, password };
+    userClone = { _id: user._id, fullName: user.full_name, login, password };
     // User authentication successful
     const accessToken = generateAccessToken(userClone);
     const refreshToken = generateRefreshToken(userClone);
@@ -47,6 +47,7 @@ const authentication = async (req, res) => {
     res.status(200).json({
       message: "Authentication successful",
       accessToken,
+      name: userClone.fullName,
     });
   } catch (error) {
     res.status(500).json({ message: "Server Error occured" });

@@ -21,6 +21,7 @@ const handleRefreshToken = async (req, res) => {
       .json({ message: "user with this refresh token not found" }); //forbidden
   }
   userClone = {
+    _id: foundUser._id,
     full_name: foundUser.full_name,
     login: foundUser.login,
     password: foundUser.password,
@@ -34,7 +35,7 @@ const handleRefreshToken = async (req, res) => {
     const newAccessToken = jwt.sign(
       userClone,
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "60s" }
+      { expiresIn: "15m" }
     );
     res.status(201).json({
       message: "New access token generated successfully",

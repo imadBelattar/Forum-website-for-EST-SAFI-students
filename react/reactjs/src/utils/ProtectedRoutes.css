@@ -1,0 +1,20 @@
+.Outlet-container{
+    border: rgb(154, 154, 154) 2px solid;
+    border-right: 0;
+/*     border-radius: 6px !important; */
+    width: 100%;
+    margin-left: 240px !important;
+    transition: margin-left 0.3s ease;
+    margin-top: 4px;
+}
+.underNav{
+    background-color: #F7F6E7!important;
+    display: flex;
+    margin-top: 58px;
+}
+  /* Media Query for Small Screens */
+  @media (max-width: 768px) {
+    .Outlet-container{
+         margin-left: 20% !important;
+    }
+  }

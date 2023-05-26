@@ -1,0 +1,9 @@
+.modal-custom{
+background-color: rgba(172, 176, 176, 0.434) !important;
+}
+.modal .yesBTN{
+    background-color: brown !important;
+}
+.modal .yesBTN:hover{
+    background-color: rgb(245, 13, 13) !important;
+}
