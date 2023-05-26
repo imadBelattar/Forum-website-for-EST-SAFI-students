@@ -3,7 +3,7 @@
     height: 100vh;
     background-color: #314E52;
     color: #fff;
-    padding-top: 20px;
+    padding-top: 40px;
     position: fixed;
     transition: width .3s ease;
   }
@@ -11,10 +11,17 @@
   .sidebar-header {
     text-align: center;
     padding-bottom: 20px;
+    display: flex;
+    margin-left: 15px;
   }
   
-  .sidebar-header h3 {
+ /*  .sidebar-header h3 {
     margin: 0;
+  } */
+  .sidebar-header .icon{
+  margin-top: 3px;
+  margin-right: 15px;
+  font-size: 120%;
   }
   
   .sidebar-menu {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
@@ -53,11 +54,15 @@ const Questions = () => {
     fetchQuestions();
   }, [localStorage.getItem("token")]);
 
+/*   goAddQuestion = () => {
+
+  } */
+
   return (
     <div className="questions">
       <div className="questionsHeader">
         <h3>Top Questions</h3>
-        <button className="btn btn-primary">Add question</button>
+        <Link to="/addQuestion" > <button className="btn btn-primary">Add question</button></Link>
       </div>
       <div className="QuestionsGroups">
         <button type="button" className="btn btn-outline-secondary info1">

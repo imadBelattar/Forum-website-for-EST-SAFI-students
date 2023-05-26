@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {Route, Routes, Navigate} from "react-router-dom";
 import Questions from "./components/Questions";
-import AsideBar from "./components/AsideBar";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Unfound from "./components/Unfound";
+import AddQuestion from "./components/AddQuestion";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import "./App.css";
 
@@ -14,9 +14,11 @@ function App() {
       {/*   <Navbar />
         <AsideBar />  */}
       <Routes>
+      <Route path="/" element={<Navigate to="/login" />}/>
         <Route element={<ProtectedRoutes />}>
           <Route exact path="/questions" element={<Questions />} />
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/addQuestion" element={<AddQuestion message="hello from protected route !" />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Unfound />} />

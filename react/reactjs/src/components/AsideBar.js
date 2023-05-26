@@ -1,11 +1,14 @@
 import React from "react";
 import "./AsideBar.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FaHome, FaInfoCircle, FaCog, FaEnvelope } from 'react-icons/fa';
 
 const AsideBar = ({name}) => {
   return (
 <div className="sidebar">
       <div className="sidebar-header">
+      <FontAwesomeIcon className="icon" icon={faUser} />
         <h5>Mr. {name}</h5>
       </div>
       <ul className="sidebar-menu">

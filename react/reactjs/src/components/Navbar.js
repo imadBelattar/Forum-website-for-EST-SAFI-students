@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
 import LogoutButton from "./LogoutButton";
-
+import EST_SAFI_logo from "../utils/img/EST SAFI LOGO.png"
 const Navbar = () => {
   //extracting the path name
   const location = useLocation();
@@ -31,7 +31,7 @@ const Navbar = () => {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark mynav fixed-top">
-      <h4 className="navbar-brand">Logo</h4>
+    <img className="logo" src={EST_SAFI_logo} width="65"/>
       <button
         className="navbar-toggler"
         type="button"
@@ -43,7 +43,7 @@ const Navbar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
+      {localStorage.getItem("token") ?  <> <ul className="navbar-nav">
           <li className="nav-item">
             <Link
               className={path === "/home" ? "nav-link activated" : "nav-link"}
@@ -79,7 +79,26 @@ const Navbar = () => {
           type="search"
           placeholder="Search"
         />
-        <LogoutButton logout={logout} />
+        <LogoutButton logout={logout} /></>
+        //else render or return these elements
+        : <>
+        <ul className="navbar-nav">
+        <li className="nav-item">
+            <Link
+              className={path === "/login" ? "nav-link activated" : "nav-link"}
+              to="/login">
+             Sign in
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className={path === "/about" ? "nav-link activated" : "nav-link"}
+              to="/about">
+              About
+            </Link>
+          </li>
+        </ul>
+        </>}
       </div>
     </nav>
   );

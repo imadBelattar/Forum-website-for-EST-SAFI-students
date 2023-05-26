@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
 import "./Login.css";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
@@ -11,6 +12,22 @@ const Login = () => {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [retryMsg, setRetryMsg] = useState("");
   const navigate = useNavigate();
+/*   useEffect(() => {
+    //if the login component renders the token will be removed
+
+
+
+
+
+
+
+
+  },[]) */
+
+
+
+  //if the login component renders the token will be removed
+  localStorage.removeItem("token")
   //handling the form submittion event
   const isAutentified = async (e) => {
     setLoginMsg("");
@@ -53,8 +70,10 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Login</h2>
+    <>
+    <Navbar/>
+          <div className="container">
+      <h5>sign in with your account</h5>
       <form className="loginForm" onSubmit={isAutentified}>
         <div className="mb-3">
           <h5 className="msg">{retryMsg}</h5>
@@ -94,6 +113,8 @@ const Login = () => {
         </button>
       </form>
     </div>
+    </>
+
   );
 };
 
