@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import SelectTags from "./SelectTags";
 import "./AddQuestion.css";
 import gallery from "../utils/img/gallery.png";
 
@@ -25,7 +26,7 @@ const AddQuestion = ({ message }) => {
       <div className="addquestionWrapper">
         <form>
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">
+            <label className="form-label">
               Title
             </label>
             <input
@@ -39,19 +40,12 @@ const AddQuestion = ({ message }) => {
             </div>
           </div>
           <div className="mb-3">
-            <label for="exampleInputPassword1" className="form-label">
+            <label className="form-label">
               Description
             </label>
             <textarea className="form-control textarea" />
           </div>
-          <div className="mb-3">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>select 3 tags as maximum</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
+            <SelectTags/>
           <div className="form-text">Add an screenshot (optional)</div>
           <img className="galleryLogo" src={gallery} width="40" />
           <div className="mb-3">
