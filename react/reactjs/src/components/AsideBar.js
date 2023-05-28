@@ -1,40 +1,55 @@
 import React from "react";
 import "./AsideBar.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FaHome, FaInfoCircle, FaCog, FaEnvelope } from 'react-icons/fa';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FaHome, FaInfoCircle, FaCog, FaEnvelope } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
-const AsideBar = ({name}) => {
+const AsideBar = ({ name }) => {
+  const location = useLocation();
+  const path = location.pathname;
   return (
-<div className="sidebar">
+    <div className="sidebar">
       <div className="sidebar-header">
-      <FontAwesomeIcon className="icon" icon={faUser} />
+        <FontAwesomeIcon className="icon" icon={faUser} />
         <h5>Mr. {name}</h5>
       </div>
       <ul className="sidebar-menu">
         <li>
-          <a href="#">
+          <Link className={path === "/home" ? "side-actived" : ""} to="/home">
             <FaHome className="sidebar-icon" />
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link
+            className={
+              path === "/questions" || path === "/addQuestion"
+                ? "side-actived"
+                : ""
+            }
+            to="/questions">
             <FaInfoCircle className="sidebar-icon" />
-            <span>About</span>
-          </a>
+            <span>Questions</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link to="/userQuestions">
             <FaCog className="sidebar-icon" />
-            <span>Settings</span>
-          </a>
+            <span>Your questions</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link to="/changePassword">
             <FaEnvelope className="sidebar-icon" />
-            <span>Contact</span>
-          </a>
+            <span>change password</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/about">
+            <FaEnvelope className="sidebar-icon" />
+            <span>about</span>
+          </Link>
         </li>
       </ul>
     </div>

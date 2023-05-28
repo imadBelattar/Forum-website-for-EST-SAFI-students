@@ -43,14 +43,40 @@ const addQuestion = async (req, res) => {
 //default is sorting by createdAt property
 const getAllQuestions = async (req, res) => {
   try {
-    const { skip } = req.query || 0; // Number of questions to skip
+    const questions = await questionModel.find().sort({ createdAt: -1 }); // Sort by created date, latest first
+    return res.status(200).json(questions);
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "An error occurred while retrieving questions" });
+  }
+};
+//questions retrieved sorting by votes
+const getAllQuestionsByVotes = async (req, res) => {
+  try {
+    const questions = await questionModel.aggregate([
+      {
+        $addFields: {
+          voteDifference: { $subtract: ["$upvotes", "$downvotes"] },
+        },
+      },
+      {
+        $sort: { voteDifference: -1 }, // Sort by vote difference, highest first
+      },
+    ]);
 
-    const questions = await questionModel
-      .find()
-      .sort({ createdAt: -1 }) // Sort by created date, latest first
-      .skip(parseInt(skip)) // Skip questions based on the provided skip value
-      .limit(100); // Limit the number of questions per batch
-
+    return res.status(200).json(questions);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while retrieving questions Oops!" });
+  }
+};
+//questions retrieved sorting by views
+const getAllQuestionsByViews = async (req, res) => {
+  try {
+    const questions = await questionModel.find().sort({ views: -1 }); // Sort by created date, latest first
     return res.status(200).json(questions);
   } catch (err) {
     return res
@@ -59,4 +85,9 @@ const getAllQuestions = async (req, res) => {
   }
 };
 
-module.exports = { addQuestion, getAllQuestions };
+module.exports = {
+  addQuestion,
+  getAllQuestions,
+  getAllQuestionsByVotes,
+  getAllQuestionsByViews,
+};

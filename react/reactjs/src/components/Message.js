@@ -4,6 +4,9 @@ import "./Message.css";
 const Message = ({ content, type, setUpdater }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
+      //this updater contain the message content and
+      //responsible for showing the message component
+      //it comes from the parent
       if (setUpdater) setUpdater(null);
     }, 1850);
 

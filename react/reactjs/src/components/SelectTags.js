@@ -53,6 +53,7 @@ const SelectTags = ({ selectedTags, setSelectedTags }) => {
     const selectedTag = event.target.value;
     if (selectedTag === "-- 3 tags as maximum --") return;
     console.log(selectedTag);
+    //make sure all the elements are unique by using the Set
     const set = new Set([...selectedTags, selectedTag]);
     setSelectedTags(Array.from(set));
     console.log(selectedTags);
@@ -63,7 +64,7 @@ const SelectTags = ({ selectedTags, setSelectedTags }) => {
       <label className="form-label">Select Tag</label>
       <select
         className="form-select"
-        onChange={(e) => handleTagSelection(e)}
+        onChange={handleTagSelection}
         aria-label="Default select example">
         <option>-- 3 tags as maximum --</option>
         {tags.map((tag, index) => {

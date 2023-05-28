@@ -45,8 +45,10 @@
   .sidebar-icon {
     margin-right: 10px;
     transition: font-weight 0.4s ease;
+
   }
-  
+
+
   /* Media Query for Small Screens */
   @media (max-width: 768px) {
     .sidebar-menu span , .sidebar h5{
@@ -61,4 +63,14 @@
         margin: auto;
     }
   }
-  
+ /*  .sidebar-icon:hover{
+    color: rgb(255, 0, 0) !important;
+  } */
+  .side-actived{
+    color: #314e52 !important;
+    background-color: whitesmoke !important;
+  }
+  .sidebar-menu a:hover{
+    color: #314e52 !important;
+    background-color: white !important;
+  }

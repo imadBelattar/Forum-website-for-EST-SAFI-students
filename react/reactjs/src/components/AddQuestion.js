@@ -33,7 +33,7 @@ const AddQuestion = () => {
   const createQuestion = async (event) => {
     event.preventDefault();
     if (!title || !description || selectedTags.length === 0) {
-      setFieldsRequired("Failed! complet all the question's required fields");
+      setFieldsRequired("Failed! complete all the required fields");
       return;
     }
     console.log(`Question creating...`);
@@ -104,9 +104,13 @@ const AddQuestion = () => {
       <h4>Ask a public question</h4>
       <div className="writeQuestion-paragraph">
         <h5>Writing a good question</h5>
-        You’re ready to ask a programming-related question and this form will
-        help guide you through the process. Looking to ask a non-programming
-        question? See the topics here to find a relevant site.
+        If you're experiencing a technical issue such as a configuration
+        problem, trouble with a command, encountering difficulties in your IDE ,
+        or have any programming-related questions. This form is designed to
+        assist you in addressing your technical concerns and guiding you through
+        the troubleshooting process. Please provide as much detail as possible
+        about the issue you're facing, and the community of <b>EST SAFI</b>{" "}
+        students will be ready to help you find a solution.
         <div className="steps">
           <p>Steps</p>
           <ul>

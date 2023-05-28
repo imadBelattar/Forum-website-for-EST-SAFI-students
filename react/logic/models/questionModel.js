@@ -38,6 +38,10 @@ const questionSchema = new mongoose.Schema({
     default: 0,
   },
   screenshots: [String],
+  views: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const questionModel = mongoose.model("Question", questionSchema, "question");
