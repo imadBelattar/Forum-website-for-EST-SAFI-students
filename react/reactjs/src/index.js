@@ -4,8 +4,6 @@ import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import 'bootstrap/dist/js/bootstrap.bundle';
-import '@popperjs/core/dist/umd/popper.min';
-import 'jquery/dist/jquery.min';
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

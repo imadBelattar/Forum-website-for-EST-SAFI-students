@@ -37,6 +37,7 @@ const questionSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  screenshots: [String],
 });
 
 const questionModel = mongoose.model("Question", questionSchema, "question");

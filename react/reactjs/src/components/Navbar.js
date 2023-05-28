@@ -31,7 +31,7 @@ const Navbar = () => {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark mynav fixed-top">
-    <img className="logo" src={EST_SAFI_logo} width="65"/>
+    <img className="logo" src={EST_SAFI_logo} alt="logo" width="65"/>
       <button
         className="navbar-toggler"
         type="button"

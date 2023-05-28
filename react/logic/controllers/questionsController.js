@@ -4,30 +4,43 @@ const questionModel = require("../models/questionModel");
 //invoked by a HTTP POST request
 const addQuestion = async (req, res) => {
   try {
-    // Define the question object
+    // Extract the data from the request body
+    const { title, description, selectedTags } = req.body;
+    const tags = JSON.parse(selectedTags);
+    // Process the image files
+    const imageFiles = req.files;
+    const imagePaths = [];
+
+    for (let i = 0; i < imageFiles.length; i++) {
+      const imagePath = imageFiles[i].path;
+      imagePaths.push(imagePath);
+    }
+
+    // Create the question object with the received data
     const question = new questionModel({
-      title: "Sample Question 2",
-      description:
-        "This is another question please guys provide a couple of solutions?",
-      tags: ["sample", "question", "python"],
-      user: req.user._id, // Assuming you have the authenticated user's ObjectId available in req.user._id
+      title,
+      description,
+      tags,
+      user: req.user._id,
       createdAt: new Date(),
       updatedAt: new Date(),
       answers: [],
+      screenshots: imagePaths, // Store the image paths in the question object
     });
 
     // Save the question in the database
     const savedQuestion = await question.save();
+
     return res.status(201).json({
       savedQuestion,
-      message: "your question has been saved successfully !",
+      message: "Your question has been saved successfully!",
     });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Failed to save question", err });
   }
 };
-
+//default is sorting by createdAt property
 const getAllQuestions = async (req, res) => {
   try {
     const { skip } = req.query || 0; // Number of questions to skip

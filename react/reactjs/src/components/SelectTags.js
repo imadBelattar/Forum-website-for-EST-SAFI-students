@@ -4,10 +4,8 @@ import axios from "axios";
 import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
 
-const SelectTags = () => {
+const SelectTags = ({ selectedTags, setSelectedTags }) => {
   const [tags, setTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
-
   useEffect(() => {
     const getTags = async () => {
       try {
@@ -81,9 +79,12 @@ const SelectTags = () => {
         })}
       </select>
       <div className="selectedTags">
-        {selectedTags.map((tagName) => {
+        {selectedTags.map((tagName, index) => {
           return (
-            <button type="button" className="btn btn-outline-primary tagbtn">
+            <button
+              key={index}
+              type="button"
+              className="btn btn-outline-primary tagbtn">
               {tagName}
             </button>
           );

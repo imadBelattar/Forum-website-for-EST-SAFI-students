@@ -1,0 +1,26 @@
+.galleryLogo{
+    margin-bottom: 30px;
+    margin-top: 10px;
+    transition: .2s;
+}
+.galleryLogo:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: .4s;
+}
+.displayedImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(194, 194, 194, 0.559);
+    border: 1px solid black;
+    margin: 0 auto !important;
+    margin-bottom: 20px !important ;
+    margin-top: 10px !important;
+    padding: 15px;
+    width: fit-content;
+
+}
+.displayedImage img{
+    border-radius: 8px !important;
+}

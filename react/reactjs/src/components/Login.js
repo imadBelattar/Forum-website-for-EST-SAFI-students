@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import "./Login.css";
 import axios from "axios";
@@ -12,19 +12,6 @@ const Login = () => {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [retryMsg, setRetryMsg] = useState("");
   const navigate = useNavigate();
-/*   useEffect(() => {
-    //if the login component renders the token will be removed
-
-
-
-
-
-
-
-
-  },[]) */
-
-
 
   //if the login component renders the token will be removed
   localStorage.removeItem("token")

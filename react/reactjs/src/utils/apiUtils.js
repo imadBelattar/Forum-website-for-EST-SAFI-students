@@ -13,6 +13,6 @@ export const refreshToken = async () => {
     const newAccessToken = response.data.accessToken;
     return newAccessToken;
   } catch (error) {
-    throw new Error("error while refreshing token !: " + error);
+    return new Error("error while refreshing token !: " + error);
   }
 };

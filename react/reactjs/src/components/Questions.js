@@ -23,8 +23,7 @@ const Questions = () => {
       } catch (error) {
         if (error.response && error.response.status === 403) {
           console.log(`API response status : ${error.response.status}`);
-
-          const newAccessToken = await refreshToken();
+                      const newAccessToken = await refreshToken();
           console.log(
             "after invoking the refresh token function : " + newAccessToken
           );
@@ -95,7 +94,7 @@ const Questions = () => {
                       <div className="tags">
                         {question.tags.map((tag, index) => {
                           let embedded = "tagx";
-                          if(index == 0) embedded = "tag1" 
+                          if(index === 0) embedded = "tag1" 
                           return (
                             <button
                           type="button"
