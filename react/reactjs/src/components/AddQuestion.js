@@ -39,7 +39,7 @@ const AddQuestion = () => {
     console.log(`Question creating...`);
 
     const token = localStorage.getItem("token");
-    const config = {
+    let config = {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -76,6 +76,7 @@ const AddQuestion = () => {
         console.log(
           "after invoking the refresh token function: " + newAccessToken
         );
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
         localStorage.setItem("token", newAccessToken);
         try {
           // Retry the original request after obtaining a new access token

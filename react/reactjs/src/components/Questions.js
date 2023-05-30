@@ -1,21 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
 import "./Questions.css";
 const Questions = () => {
-  const [userQuestions, setUserQuestions] = useState([]);
+  const navigate = useNavigate()
   const [questions, setQuestions] = useState([]);
   const createdAt = useRef(null)
   const voted = useRef(null)
   const viewed = useRef(null)
+  //reset button styles
   const resetButtons = (refs) => {
     refs.forEach(ref => {
       ref.current.style.backgroundColor = "";
       ref.current.style.color = "";
     });
+  }
+  //style the pressed button
+  const styleButton = (ref) => {
+    ref.current.style.backgroundColor = "gray";
+    ref.current.style.color = "white";
   }
   const fetchQuestions = async (sortedBy) => {
     let endpoint
@@ -23,24 +29,20 @@ const Questions = () => {
       case "created at":
         resetButtons([voted,viewed]);
         endpoint = "getAllQuestions"
-        createdAt.current.style.backgroundColor = "gray";
-        createdAt.current.style.color = "white";
+        styleButton(createdAt)
         break;
       case "most voted":
         resetButtons([createdAt,viewed]);
         endpoint = "getAllQuestionsByVotes"
-        voted.current.style.backgroundColor = "gray";
-        voted.current.style.color = "white";
+        styleButton(voted)
         break;
       case "most viewed":
         resetButtons([createdAt,voted]);
         endpoint = "getAllQuestionsByViews"
-        viewed.current.style.backgroundColor = "gray";
-        viewed.current.style.color = "white";
+        styleButton(viewed)
         break;
     }
     
-
     try {
       const token = localStorage.getItem("token");
       const config = {
@@ -83,6 +85,10 @@ const Questions = () => {
     fetchQuestions("created at");
   }, [localStorage.getItem("token")]);
 
+//the function responsible for showing (redirecting to) the question
+const goToQuestion = (id) => {
+  navigate(`/showQuestion/${id}`);
+};
   return (
     <div className="questions">
       <div className="questionsHeader">
@@ -110,12 +116,14 @@ const Questions = () => {
                     <ul>
                       <li>{question.upvotes - question.downvotes} votes</li>
                       <li>{question.answers.length} answers</li>
-                      <li>views</li>
+                      <li>{question.views} views</li>
                     </ul>
                   </td>
                   <td className="questionStm">
                     <ul>
-                      <li className="question-title"> {question.title}</li>
+                    {/* when the use click the title will see the whole question in  */}
+                    {/* showQuestion component */}
+                      <li className="question-title" onClick={() => goToQuestion(question._id)}> {question.title}</li>
                       <li>
                       <div className="tags">
                         {question.tags.map((tag, index) => {

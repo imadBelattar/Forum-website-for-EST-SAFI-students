@@ -9,19 +9,21 @@
   }
   
   .sidebar-header {
+    justify-content: flex;
     text-align: center;
+    align-items: center;
     padding-bottom: 20px;
     display: flex;
-    margin-left: 15px;
+    border-bottom: 3px #2b4347 solid !important ;
+    width: 100%;
   }
-  
- /*  .sidebar-header h3 {
-    margin: 0;
-  } */
-  .sidebar-header .icon{
-  margin-top: 3px;
-  margin-right: 15px;
-  font-size: 120%;
+  .user-logo{
+    font-size: 200%;
+    margin-right: 20px;
+    margin-left: 8px;
+  }
+  .use-name{
+    margin-top: 6px;
   }
   
   .sidebar-menu {

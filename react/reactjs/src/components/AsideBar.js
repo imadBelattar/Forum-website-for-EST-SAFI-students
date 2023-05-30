@@ -1,8 +1,13 @@
 import React from "react";
 import "./AsideBar.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FaHome, FaInfoCircle, FaCog, FaEnvelope } from "react-icons/fa";
+import {
+  FaHome,
+  FaQuestionCircle,
+  FaExclamationCircle,
+  FaRegClipboard,
+  FaUserCircle,
+  FaUserLock
+} from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
 const AsideBar = ({ name }) => {
@@ -11,8 +16,8 @@ const AsideBar = ({ name }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <FontAwesomeIcon className="icon" icon={faUser} />
-        <h5>Mr. {name}</h5>
+        <FaUserCircle className="sidebar-icon user-logo" />
+        <h5 className="use-name">Mr. {name}</h5>
       </div>
       <ul className="sidebar-menu">
         <li>
@@ -24,30 +29,30 @@ const AsideBar = ({ name }) => {
         <li>
           <Link
             className={
-              path === "/questions" || path === "/addQuestion"
+              path === "/questions" || path === "/addQuestion" || path.startsWith("/showQuestion")
                 ? "side-actived"
                 : ""
             }
             to="/questions">
-            <FaInfoCircle className="sidebar-icon" />
+            <FaQuestionCircle className="sidebar-icon" />
             <span>Questions</span>
           </Link>
         </li>
         <li>
           <Link to="/userQuestions">
-            <FaCog className="sidebar-icon" />
+            <FaRegClipboard className="sidebar-icon" />
             <span>Your questions</span>
           </Link>
         </li>
         <li>
           <Link to="/changePassword">
-            <FaEnvelope className="sidebar-icon" />
+            <FaUserLock className="sidebar-icon" />
             <span>change password</span>
           </Link>
         </li>
         <li>
           <Link to="/about">
-            <FaEnvelope className="sidebar-icon" />
+            <FaExclamationCircle className="sidebar-icon" />
             <span>about</span>
           </Link>
         </li>
