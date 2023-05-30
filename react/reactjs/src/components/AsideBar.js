@@ -2,11 +2,12 @@ import React from "react";
 import "./AsideBar.css";
 import {
   FaHome,
-  FaQuestionCircle,
+  FaComments,
   FaExclamationCircle,
-  FaRegClipboard,
+  FaCommentAlt,
   FaUserCircle,
-  FaUserLock
+  FaUserLock,
+  FaClipboardCheck
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
@@ -29,19 +30,27 @@ const AsideBar = ({ name }) => {
         <li>
           <Link
             className={
-              path === "/questions" || path === "/addQuestion" || path.startsWith("/showQuestion")
+              path === "/questions" ||
+              path === "/addQuestion" ||
+              path.startsWith("/showQuestion")
                 ? "side-actived"
                 : ""
             }
             to="/questions">
-            <FaQuestionCircle className="sidebar-icon" />
+            <FaComments className="sidebar-icon" />
             <span>Questions</span>
           </Link>
         </li>
         <li>
           <Link to="/userQuestions">
-            <FaRegClipboard className="sidebar-icon" />
+            <FaCommentAlt className="sidebar-icon" />
             <span>Your questions</span>
+          </Link>
+        </li>{" "}
+        <li>
+          <Link to="/userAnswers">
+            <FaClipboardCheck className="sidebar-icon" />
+            <span>Your Answers</span>
           </Link>
         </li>
         <li>

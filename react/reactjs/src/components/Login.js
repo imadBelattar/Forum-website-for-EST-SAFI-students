@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import Message from "./Message";
 import "./Login.css";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
@@ -14,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   //if the login component renders the token will be removed
-  localStorage.removeItem("token")
+  localStorage.removeItem("token");
   //handling the form submittion event
   const isAutentified = async (e) => {
     setLoginMsg("");
@@ -58,50 +59,57 @@ const Login = () => {
 
   return (
     <>
-    <Navbar/>
-          <div className="container">
-      <h5>sign in with your account</h5>
-      <form className="loginForm" onSubmit={isAutentified}>
-        <div className="mb-3">
-          <h5 className="msg">{retryMsg}</h5>
-          <label htmlFor="username" className="form-label labelUsername">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            placeholder="Enter your username"
-            value={login}
-            onChange={(e) => {
-              setLogin(e.target.value);
-            }}
+      <Navbar />
+      <div className="container">
+        <h4 className="signInMsg">sign in with your account</h4>
+        <form className="loginForm" onSubmit={isAutentified}>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label labelUsername">
+              Username
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              placeholder="Enter your username"
+              value={login}
+              onChange={(e) => {
+                setLogin(e.target.value);
+              }}
+            />
+            <p className="msg">{loginMsg}</p>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label labelPassword">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <p className="msg">{passwordMsg}</p>
+          </div>
+          <button type="submit" className="btn btn-danger signIn">
+            Sign In
+          </button>
+        </form>
+        {retryMsg && (
+          <Message
+            content={retryMsg}
+            setUpdater={setRetryMsg}
+            type={"danger"}
+            topP={"20%"}
+            heightP={"80px"}
           />
-          <p className="msg">{loginMsg}</p>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label labelPassword">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <p className="msg">{passwordMsg}</p>
-        </div>
-        <button type="submit" className="btn btn-danger signIn">
-          Sign In
-        </button>
-      </form>
-    </div>
+        )}
+      </div>
     </>
-
   );
 };
 

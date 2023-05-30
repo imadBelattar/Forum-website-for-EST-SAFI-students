@@ -14,8 +14,8 @@
     border-radius: 0 !important;
     height: 42px;
     width: 60% !important;
-    margin-left: 30% !important;
     margin-right: 0 !important;
+    margin-left: 17px !important;
 }
 .logout{
     margin-left: 30px !important;
@@ -39,4 +39,9 @@
 }
 .navbar-nav{
     margin-left: 60px !important;
+}
+.search-icon{
+    font-size: 180%;
+    margin-left: 29% !important;
+    color: rgb(161 80 24);
 }

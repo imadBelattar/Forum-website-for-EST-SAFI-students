@@ -5,6 +5,7 @@ import { baseURL } from "../utils/constant";
 import LogoutButton from "./LogoutButton";
 import EST_SAFI_logo from "../utils/img/EST SAFI LOGO.png";
 import app_logo from "../utils/img/app_logo.png";
+import { FaSearch } from "react-icons/fa";
 const Navbar = () => {
   //extracting the path name
   const location = useLocation();
@@ -32,8 +33,16 @@ const Navbar = () => {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark mynav fixed-top">
-     {!localStorage.getItem("token") && <img className="logo" src={EST_SAFI_logo} alt="logo" width="65" /> } 
-      <img className="app-logo" src={app_logo} alt="logo" width={150} height={60} />
+      {!localStorage.getItem("token") && (
+        <img className="logo" src={EST_SAFI_logo} alt="logo" width="65" />
+      )}
+      <img
+        className="app-logo"
+        src={app_logo}
+        alt="logo"
+        width={150}
+        height={60}
+      />
       <button
         className="navbar-toggler"
         type="button"
@@ -47,6 +56,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         {localStorage.getItem("token") ? (
           <>
+            <FaSearch className="search-icon" />
             <input
               className="form-control search-input"
               type="search"

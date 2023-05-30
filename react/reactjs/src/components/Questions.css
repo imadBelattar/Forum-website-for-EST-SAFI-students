@@ -86,3 +86,29 @@ height: 35px !important;
 .btn-outline-secondary{
     border-radius: 0 !important;
 }
+.isAnswered{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 2px;
+    padding-right: 3px;
+    padding-left: 3px;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: rgb(3, 123, 3);
+    color: white;
+}
+.isNotAnswered{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 2px;
+    padding-right: 3px;
+    padding-left: 3px;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color : black;
+}
+.isAnswered .icon{
+    margin-right: 4px;
+}

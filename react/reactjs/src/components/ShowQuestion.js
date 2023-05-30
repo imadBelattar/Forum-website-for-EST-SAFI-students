@@ -3,6 +3,9 @@ import "./ShowQuestion.css";
 import { useLocation } from "react-router-dom";
 import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
+import { formatMeasurement } from "../utils/functions";
+import { FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
+import testImage from "../utils/img/testing my server's API using POSTMAN.png";
 import axios from "axios";
 
 const ShowQuestion = () => {
@@ -11,6 +14,8 @@ const ShowQuestion = () => {
   const [Asked_in, setAsked_in] = useState(0);
   const [Modified_in, setModified_in] = useState(0);
   const [Viewed, setViewed] = useState(0);
+  const [tagsArray, setTagsArray] = useState([]);
+  const [imagesPaths, setImagesPaths] = useState([]);
   //end of states
   const pathSplitted = useLocation().pathname.split("/");
   const shownQuestionID = pathSplitted[pathSplitted.length - 1];
@@ -20,6 +25,8 @@ const ShowQuestion = () => {
     //do stuffs
     const doStuffs = (response) => {
       setQuestion(response.data.question);
+      setTagsArray(response.data.question.tags);
+      setImagesPaths(response.data.question.screenshots);
       const createdAt = response.data.question.createdAt;
       let daysAgo = Math.floor(
         (Date.now() - new Date(createdAt)) / (1000 * 60 * 60 * 24)
@@ -30,7 +37,7 @@ const ShowQuestion = () => {
         (Date.now() - new Date(updatedAt)) / (1000 * 60 * 60 * 24)
       );
       setModified_in(daysAgo);
-      setViewed(response.data.question.views)
+      setViewed(response.data.question.views);
     };
     //display the selected question
     const displayQuestion = async () => {
@@ -79,18 +86,67 @@ const ShowQuestion = () => {
       <ul>
         <li>
           <div className="form-text">
-            Asked <b>{Asked_in} days ago </b>
+            Asked <b>{Asked_in === 0 ? "today" : Asked_in + " days ago"} </b>
           </div>
         </li>
         <li>
           <div className="form-text">
-            Modified <b>{Modified_in} days ago </b>
+            Modified{" "}
+            <b>{Modified_in === 0 ? "today" : Modified_in + " days ago"} </b>
           </div>
         </li>
         <li>
-          <div className="form-text"><b>{Viewed}</b> Viewed</div>
+          <div className="form-text">
+            <b>{formatMeasurement(Viewed)}</b> Viewed
+          </div>
         </li>
       </ul>
+      <hr />
+      <div style={{ marginBottom: "25px" }}></div>
+      <div className="questionDescription">
+        <div className="votting">
+          <ol>
+            <li>
+              {" "}
+              <FaCaretSquareUp className="upvote" />
+            </li>
+            <li> {question.upvotes - question.downvotes} </li>
+            <li>
+              {" "}
+              <FaCaretSquareDown className="downvote" />
+            </li>
+          </ol>
+        </div>
+        <div>{question.description}</div>
+      </div>
+      <div className="showTags">
+        {tagsArray.map((tag, index) => {
+          let embedded = "tagx";
+          if (index === 0) embedded = "tag1";
+          return (
+            <button
+              key={index}
+              type="button"
+              className={`btn btn-outline-primary ${embedded}`}>
+              {tag}
+            </button>
+          );
+        })}
+      </div>
+      <hr />
+      <div className="screenshots-For-Question">
+        <h5>screenshots :</h5>
+        {imagesPaths.map((imagePath, index) => {
+          console.log("map the images : ", imagePath);
+          return (
+            <div className="img-cover" key={index}>
+              <img src={baseURL+'/'+imagePath} key={index} alt="screenshot" />
+            </div>
+          );
+        })}
+      </div>
+      {/* end ************* */}
+      <div className="component-before-end"></div>
     </div>
   );
 };

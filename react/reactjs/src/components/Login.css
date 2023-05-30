@@ -14,9 +14,11 @@
 .labelPassword{
 margin-top: 12px;
 }
-h5{
+signInMsg{
     text-align: center;
-    font-weight: 300 !important;
+    font-weight: 400 !important;
+    color: rgb(161 80 24);
+    font-family: Century Gothic;
 }
 .loginForm{
     padding : 20px;
@@ -34,4 +36,5 @@ input{
     padding: 0 !important;
     font-weight :  bold;
 }
+
 

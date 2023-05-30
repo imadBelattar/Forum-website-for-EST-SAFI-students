@@ -71,12 +71,7 @@ const ImageUpload = ({ selectedImgFiles, setSelectedImgFiles }) => {
             <div key={index}>
               <div className="form-text">screenshot {index + 1}</div>
               <div className="displayedImage">
-                <img
-                  src={generateSrc(image)}
-                  alt="Selected"
-                  width="800"
-                  height="500"
-                />
+                <img src={generateSrc(image)} alt="Selected screenshot" />
               </div>
             </div>
           );

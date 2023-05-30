@@ -4,6 +4,9 @@ const cors = require("cors");
 const userRoutes = require("./routes/userRoute");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
+const verifyJWT = require("./middleware/verifyJWT");
 
 const app = express();
 
@@ -35,15 +38,19 @@ app.get("/api/testCookieALMIGHTY", (req, res) => {
 });
 //for undefined api routes :
 
-app.get("*", (req, res) => {
-  res.status(404).json({ message: "UNFOUND 404" });
+app.get("*", (req, res, next) => {
+  if (req.url.startsWith("/api/uploads")) {
+    next();
+  } else {
+    res.status(404).json({ message: "UNFOUND 404" });
+  }
 });
 app.post("*", (req, res) => {
   res.status(404).json({ message: "UNFOUND 404" });
 });
-//console.log(process.env.MONGO_URI);
+//using uploads folder as static folder
+app.use("/api/uploads", express.static("uploads"));
 
-// Connect to MongoDB database
 console.log(process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI)

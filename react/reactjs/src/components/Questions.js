@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
+import { formatMeasurement } from "../utils/functions";
 import { refreshToken } from "../utils/apiUtils";
+import {FaCheck} from "react-icons/fa"
 import "./Questions.css";
 const Questions = () => {
   const navigate = useNavigate()
@@ -41,6 +43,8 @@ const Questions = () => {
         endpoint = "getAllQuestionsByViews"
         styleButton(viewed)
         break;
+      default:
+        return;
     }
     
     try {
@@ -89,6 +93,7 @@ const Questions = () => {
 const goToQuestion = (id) => {
   navigate(`/showQuestion/${id}`);
 };
+
   return (
     <div className="questions">
       <div className="questionsHeader">
@@ -114,14 +119,14 @@ const goToQuestion = (id) => {
                 <tr key={index} className="questionTr">
                   <td className="threeStates">
                     <ul>
-                      <li>{question.upvotes - question.downvotes} votes</li>
-                      <li>{question.answers.length} answers</li>
-                      <li>{question.views} views</li>
+                      <li>{formatMeasurement(question.upvotes - question.downvotes)} votes</li>
+                      <li className={question.isAnswered ? "isAnswered" : question.answers.length ? "isNotAnswered" : ""}>{question.isAnswered && <FaCheck className="icon"/>}{formatMeasurement(question.answers.length)} answers </li>
+                      <li>{formatMeasurement(question.views)} views</li>
                     </ul>
                   </td>
                   <td className="questionStm">
                     <ul>
-                    {/* when the use click the title will see the whole question in  */}
+                    {/* when the user click the title will see the whole question in  */}
                     {/* showQuestion component */}
                       <li className="question-title" onClick={() => goToQuestion(question._id)}> {question.title}</li>
                       <li>

@@ -115,7 +115,8 @@ const selectQuestion = async (req, res) => {
         upvotes: question.upvotes,
         downvotes: question.downvotes,
         screenshots: question.screenshots,
-        views: question.views
+        tags: question.tags,
+        views: question.views,
       },
       answers: answers.map((answer) => ({
         _id: answer._id,
