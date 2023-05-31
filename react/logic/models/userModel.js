@@ -18,6 +18,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  upvotedQuestions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Question",
+    },
+  ],
+  downvotedQuestions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Question",
+    },
+  ],
 });
+
 const userModel = mongoose.model("User", userSchema, "user");
+
 module.exports = userModel;

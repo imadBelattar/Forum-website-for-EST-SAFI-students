@@ -29,6 +29,7 @@
 .questionDescription{
     display: flex;
 }
+
 .questionDescription div:nth-child(2){
     border-radius: 2px;
     width: 70%;
@@ -64,14 +65,26 @@
     margin-bottom: 50px;
 }
 .img-cover{
-    display: flex;
-    justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
     padding-bottom: 0 !important;
     margin: 0 auto !important;
     padding: 2%;
+    width: fit-content;
 }
 .screenshots-For-Question img{
     max-width: 80% !important;
     max-height: 800px !important;
     border: 1px solid rgba(163, 156, 156, 0.788) !important;
+}
+.vote-icon{
+    transition: color .1s;
+}
+.vote-icon:hover{
+    color: orange;
+    cursor: pointer;
+}
+.vote-checked{
+    color: orange;
+    border: 2px solid rgb(205, 134, 2);
 }

@@ -173,6 +173,8 @@ const AddQuestion = () => {
           setUpdater={
             fieldsRequired ? setFieldsRequired : setQuestionCreatedMsg
           }
+          topP={"50%"}
+          heightP={"200px"}
         />
       )}
     </div>

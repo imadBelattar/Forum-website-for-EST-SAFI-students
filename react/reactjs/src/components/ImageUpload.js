@@ -43,6 +43,8 @@ const ImageUpload = ({ selectedImgFiles, setSelectedImgFiles }) => {
           content={screenshotsMsg}
           type={"danger"}
           setUpdater={setScreenshotsMsg}
+          topP={"50%"}
+          heightP={"200px"}
         />
       )}
       <input

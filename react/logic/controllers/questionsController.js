@@ -1,5 +1,6 @@
 const questionModel = require("../models/questionModel");
 const answerModel = require("../models/answerModel");
+const userModel = require("../models/userModel");
 
 //invoked by a HTTP POST request
 const addQuestion = async (req, res) => {
@@ -88,7 +89,18 @@ const getAllQuestionsByViews = async (req, res) => {
 //return a question when the user selected it using the ID
 const selectQuestion = async (req, res) => {
   try {
+    const userId = req.user._id;
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    let voted = {};
     const { id } = req.params; // Get the question ID from the request parameters
+    if (user.upvotedQuestions.includes(id)) {
+      voted.votting_type = "already upvoted";
+    } else if (user.downvotedQuestions.includes(id)) {
+      voted.votting_type = "already downvoted";
+    }
     const question = await questionModel
       .findById(id)
       .populate("user", "full_name-_id") // Populate the user field with the full_name
@@ -105,6 +117,7 @@ const selectQuestion = async (req, res) => {
 
     // Prepare the response object with the question and its answers
     const response = {
+      voted,
       question: {
         _id: question._id,
         title: question.title,
@@ -138,10 +151,89 @@ const selectQuestion = async (req, res) => {
   }
 };
 
+//I was lazy to create multiple functions to handle the votting process
+//update the votes
+const updateQuestionvotes = async (req, res) => {
+  const vote_type = req.body.vote_type;
+  if (!vote_type) {
+    return res.status(400).json({ message: "No voting type is found!" });
+  }
+  const userId = req.user._id;
+  const { questionId } = req.params; // Extract the questionId from req.params
+  try {
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    // Find the question by its id
+    const question = await questionModel.findById(questionId);
+    if (!question) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+    let feedback;
+    switch (vote_type) {
+      case "upvote":
+        if (user.downvotedQuestions.includes(questionId)) {
+          user.downvotedQuestions.pull(questionId);
+          question.downvotes -= 1; // Decrease downvotes by 1
+        }
+        question.upvotes += 1; // Increase upvotes by 1
+        user.upvotedQuestions.push(questionId);
+        feedback = "Thanks for your feedback!";
+        break;
+
+      case "downvote":
+        if (user.upvotedQuestions.includes(questionId)) {
+          user.upvotedQuestions.pull(questionId);
+          question.upvotes -= 1; // Decrease downvotes by 1
+        }
+        question.downvotes += 1; // Increase downvotes by 1
+        user.downvotedQuestions.push(questionId);
+        feedback = "Thanks for your feedback!";
+        break;
+
+      case "remove upvote":
+        if (user.upvotedQuestions.includes(questionId)) {
+          user.upvotedQuestions.pull(questionId);
+          question.upvotes -= 1; // Decrease upvotes by 1
+          feedback = "You have canceled upvoting this question";
+        } else {
+          feedback = "Question was not upvoted by you";
+        }
+        break;
+
+      case "remove downvote":
+        if (user.downvotedQuestions.includes(questionId)) {
+          user.downvotedQuestions.pull(questionId);
+          question.downvotes -= 1; // Decrease downvotes by 1
+          feedback = "You have canceled downvoting this question";
+        } else {
+          feedback = "Question was not downvoted by you";
+        }
+        break;
+
+      default:
+        return res
+          .status(400)
+          .json({ message: "Invalid vote_type", vote_type });
+    }
+    // Save the updated question
+    await question.save();
+    // Save the updated user document
+    await user.save();
+    const message = "Upvoted successfully!";
+    return res.status(200).json({ message, feedback });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
 module.exports = {
   addQuestion,
   getAllQuestions,
   getAllQuestionsByVotes,
   getAllQuestionsByViews,
   selectQuestion,
+  updateQuestionvotes,
 };

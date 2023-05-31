@@ -26,16 +26,6 @@ app.use("/api", require("./routes/questionRoute"));
 app.use("/api", require("./routes/refreshTokenRoute"));
 app.use("/api", require("./routes/logoutRoute"));
 app.use("/api", require("./routes/tagRoute"));
-
-//this is just for test the are cookies stored in browser
-app.get("/api/testCookieALMIGHTY", (req, res) => {
-  res.cookie("test", "tested-cookie", {
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
-    domain: "localhost",
-  });
-  res.status(201).json({ message: "I may sent a cookie included" });
-});
 //for undefined api routes :
 
 app.get("*", (req, res, next) => {
