@@ -1,0 +1,13 @@
+.backward-btn{
+    padding: 15px;
+    background-color: #eaeae5;
+}
+.backward-btn .icon{
+    color: #366369 !important;
+    font-size: 225%;
+    transition: .2s;
+}
+.backward-btn .icon:hover{
+    color: #294447 !important;
+    transition:  .3s;
+}

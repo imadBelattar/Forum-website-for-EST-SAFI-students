@@ -1,7 +1,6 @@
 import React from "react";
 import "./AsideBar.css";
 import {
-  FaHome,
   FaComments,
   FaExclamationCircle,
   FaCommentAlt,
@@ -21,12 +20,6 @@ const AsideBar = ({ name }) => {
         <h5 className="use-name">Mr. {name}</h5>
       </div>
       <ul className="sidebar-menu">
-        <li>
-          <Link className={path === "/home" ? "side-actived" : ""} to="/home">
-            <FaHome className="sidebar-icon" />
-            <span>Home</span>
-          </Link>
-        </li>
         <li>
           <Link
             className={

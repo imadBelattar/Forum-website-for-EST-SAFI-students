@@ -6,7 +6,9 @@ import { refreshToken } from "../utils/apiUtils";
 import { formatMeasurement } from "../utils/functions";
 import { FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
 import Message from "./Message";
+import BackwardButton from "./BackwardButton";
 import axios from "axios";
+import Creator from "./Creator";
 
 const ShowQuestion = () => {
   //states
@@ -18,6 +20,7 @@ const ShowQuestion = () => {
   const [imagesPaths, setImagesPaths] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [voted, setVoted] = useState("");
+  const [question_creator, setQuestion_creator] = useState("")
   //end of states
   const pathSplitted = useLocation().pathname.split("/");
   const shownQuestionID = pathSplitted[pathSplitted.length - 1];
@@ -42,6 +45,8 @@ const ShowQuestion = () => {
     setViewed(response.data.question.views);
     const isVoted = response.data.voted.votting_type || "";
     setVoted(isVoted);
+    const creator = response.data.question.question_creator || "Guest"
+    setQuestion_creator(creator)
   };
 
   //display the selected question
@@ -144,7 +149,9 @@ const ShowQuestion = () => {
   };
   return (
     <div className="selectedQuestion-wrapper">
+      <BackwardButton linkTo={"/questions"} />
       <h4>{question.title}</h4>
+      <Creator creatorName={question_creator}/>
       <ul>
         <li>
           <div className="form-text">
@@ -179,7 +186,7 @@ const ShowQuestion = () => {
                 }
               />
             </li>
-            <li> {question.upvotes  - question.downvotes} </li>
+            <li> {question.upvotes - question.downvotes} </li>
             <li>
               {" "}
               <FaCaretSquareDown

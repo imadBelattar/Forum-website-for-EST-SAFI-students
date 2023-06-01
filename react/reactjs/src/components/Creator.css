@@ -1,0 +1,20 @@
+.creator-logo{
+    font-size: 150%;
+    margin-right: 10px !important;
+}
+.creator-wrapper{
+    border: 1px solid rgb(138, 133, 126);
+    border-radius: 8px;
+    padding: 5px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    padding-right: 10px;
+    width: fit-content;
+    background-color: #E7E6E1;
+    margin-left: 35px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+.creator-wrapper .form-text{
+    margin-bottom: 5px;
+}

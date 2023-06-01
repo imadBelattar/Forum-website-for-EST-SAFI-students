@@ -14,7 +14,7 @@
 .labelPassword{
 margin-top: 12px;
 }
-signInMsg{
+.signInMsg{
     text-align: center;
     font-weight: 400 !important;
     color: rgb(161 80 24);

@@ -6,6 +6,7 @@ import axios from "axios";
 import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
 import Message from "./Message";
+import BackwardButton from "./BackwardButton";
 
 const AddQuestion = () => {
   //states defined for the sub-components:
@@ -102,6 +103,9 @@ const AddQuestion = () => {
 
   return (
     <div className="addquestionContainer">
+      <BackwardButton
+        linkTo={"/questions"}
+      />
       <h4>Ask a public question</h4>
       <div className="writeQuestion-paragraph">
         <h5>Writing a good question</h5>

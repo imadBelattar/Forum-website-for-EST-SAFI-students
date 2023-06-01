@@ -45,8 +45,8 @@ const Login = () => {
         if (recievedAccessToken) {
           localStorage.setItem("token", recievedAccessToken);
           localStorage.setItem("name", response.data.name);
-          //get redirected to the /home to see the home page
-          navigate("/home");
+          //get redirected to the /Question
+          navigate("/questions");
         }
       })
       .catch((error) => {
