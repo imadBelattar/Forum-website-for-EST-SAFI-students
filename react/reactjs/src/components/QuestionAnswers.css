@@ -1,0 +1,17 @@
+.answer-content{
+    background-color: #ffe7c8;
+    border-radius: 10px;
+    margin: auto 10%;
+    margin-left: 0px;
+    padding: 20px;
+    padding-top: 20px;
+}
+.screenshots-For-answer img{
+    max-width: 80% !important;
+    max-height: 800px !important;
+    border: 1px solid rgba(163, 156, 156, 0.788) !important;
+}
+.voting-content{
+    display: flex;
+    margin-top: 40px !important;
+}

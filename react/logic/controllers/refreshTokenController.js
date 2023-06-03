@@ -12,7 +12,7 @@ const handleRefreshToken = async (req, res) => {
     }); //unauthorized
   }
   // printing the jwt property on the console
-  console.log(cookies.jwt);
+  console.log("jwt coming from browser ", cookies.jwt);
   const refreshToken = cookies.jwt;
   const foundUser = await userModel.findOne({ refreshToken });
   if (!foundUser) {

@@ -9,6 +9,7 @@ import Message from "./Message";
 import BackwardButton from "./BackwardButton";
 import axios from "axios";
 import Creator from "./Creator";
+import QuestionAnswers from "./QuestionAnswers";
 
 const ShowQuestion = () => {
   //states
@@ -20,7 +21,8 @@ const ShowQuestion = () => {
   const [imagesPaths, setImagesPaths] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [voted, setVoted] = useState("");
-  const [question_creator, setQuestion_creator] = useState("")
+  const [question_creator, setQuestion_creator] = useState("");
+  const [questionAnswers, setQuestionAnswers] = useState([]);
   //end of states
   const pathSplitted = useLocation().pathname.split("/");
   const shownQuestionID = pathSplitted[pathSplitted.length - 1];
@@ -45,8 +47,10 @@ const ShowQuestion = () => {
     setViewed(response.data.question.views);
     const isVoted = response.data.voted.votting_type || "";
     setVoted(isVoted);
-    const creator = response.data.question.question_creator || "Guest"
-    setQuestion_creator(creator)
+    const creator = response.data.question.question_creator || "Guest";
+    setQuestion_creator(creator);
+    const resQuestionAnswers = response.data.answers || [];
+    setQuestionAnswers(resQuestionAnswers);
   };
 
   //display the selected question
@@ -150,8 +154,8 @@ const ShowQuestion = () => {
   return (
     <div className="selectedQuestion-wrapper">
       <BackwardButton linkTo={"/questions"} />
+      <Creator creatorName={question_creator} role={"posted this question"} logo_color={"#F97B22"}/>
       <h4>{question.title}</h4>
-      <Creator creatorName={question_creator}/>
       <ul>
         <li>
           <div className="form-text">
@@ -186,7 +190,7 @@ const ShowQuestion = () => {
                 }
               />
             </li>
-            <li> {question.upvotes - question.downvotes} </li>
+            <li className="votes-number"> {question.upvotes - question.downvotes} </li>
             <li>
               {" "}
               <FaCaretSquareDown
@@ -218,7 +222,6 @@ const ShowQuestion = () => {
           );
         })}
       </div>
-      <hr />
       <div className="screenshots-For-Question">
         <h5>screenshots :</h5>
         {imagesPaths.map((imagePath, index) => {
@@ -233,6 +236,11 @@ const ShowQuestion = () => {
           );
         })}
       </div>
+      <hr />
+      <div className="Answers-term">
+        <h5>Answers :</h5>
+      </div>
+      <QuestionAnswers answers={questionAnswers} />
       {/* end ************* */}
       <div className="component-before-end"></div>
       {feedback && (

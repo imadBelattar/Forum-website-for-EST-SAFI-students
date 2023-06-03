@@ -1,20 +1,20 @@
 .creator-logo{
-    font-size: 150%;
+    font-size: 200%;
     margin-right: 10px !important;
 }
 .creator-wrapper{
-    border: 1px solid rgb(138, 133, 126);
-    border-radius: 8px;
+    border-radius: 8px; 
     padding: 5px;
-    padding-bottom: 10px;
-    padding-left: 8px;
+    padding-left: 35px;
     padding-right: 10px;
-    width: fit-content;
-    background-color: #E7E6E1;
-    margin-left: 35px;
-    margin-bottom: 20px;
-    margin-top: 25px;
+    margin-top: 20px;
+    margin-bottom: 7px;
+    display: flex;
+    
 }
 .creator-wrapper .form-text{
-    margin-bottom: 5px;
+    margin-left: 8px;
+}
+.creator-wrapper .creator-name{
+   padding-top: 2px;
 }

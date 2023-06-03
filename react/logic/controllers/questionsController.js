@@ -132,16 +132,10 @@ const selectQuestion = async (req, res) => {
         views: question.views,
       },
       answers: answers.map((answer) => ({
-        _id: answer._id,
-        content: answer.content,
+        ...answer,
         answer_creator: answer.user.full_name,
-        createdAt: answer.createdAt,
-        updatedAt: answer.updatedAt,
-        upvotes: answer.upvotes,
-        downvotes: answer.downvotes,
       })),
     };
-
     return res.status(200).json(response);
   } catch (err) {
     console.error(err);

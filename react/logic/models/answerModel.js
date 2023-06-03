@@ -26,6 +26,11 @@ const answerSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  screenshots: [String],
+  isAccepted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const answerModel = mongoose.model("Answer", answerSchema, "answer");

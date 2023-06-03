@@ -30,6 +30,18 @@ const userSchema = new mongoose.Schema({
       ref: "Question",
     },
   ],
+  upvotedAnswers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Answer",
+    },
+  ],
+  downvotedAnswers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Answer",
+    },
+  ],
 });
 
 const userModel = mongoose.model("User", userSchema, "user");

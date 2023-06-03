@@ -11,6 +11,9 @@ export const refreshToken = async () => {
     const response = await axios.get(`${baseURL}/refreshToken`, config);
     console.log("refresh token response status: " + response.status);
     const newAccessToken = response.data.accessToken;
+    if (newAccessToken) {
+      localStorage.setItem("token", newAccessToken);
+    }
     return newAccessToken;
   } catch (error) {
     return new Error("error while refreshing token !: " + error);

@@ -2,13 +2,16 @@
     height: fit-content;
 }
 .selectedQuestion-wrapper h4{
-    margin-top: 40px;
     margin-left: 30px;
     margin-bottom: 20px;
     font-weight: 400 !important;
     font-family: Century Gothic;
 }
-.screenshots-For-Question h5{
+.screenshots-For-Question{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.screenshots-For-Question h5, .Answers-term h5{
     margin-top: 30px;
     margin-left: 40px;
     font-weight: 400 !important;

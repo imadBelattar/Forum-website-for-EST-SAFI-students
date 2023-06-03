@@ -26,6 +26,7 @@ app.use("/api", require("./routes/questionRoute"));
 app.use("/api", require("./routes/refreshTokenRoute"));
 app.use("/api", require("./routes/logoutRoute"));
 app.use("/api", require("./routes/tagRoute"));
+app.use("/api", require("./routes/answerRoute"));
 //for undefined api routes :
 
 app.get("*", (req, res, next) => {

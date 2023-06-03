@@ -1,0 +1,33 @@
+
+.answer-voting-wrapper{
+    margin: 0 !important;
+    margin-left: 35px !important;
+    margin-right: 50px !important;
+    margin-top: 15px !important;
+
+}
+
+.vote-icon{
+    transition: color .1s;
+}
+.vote-icon:hover{
+    color: orange;
+    cursor: pointer;
+}
+.vote-checked{
+    color: orange;
+    border: 2px solid rgb(205, 134, 2);
+}
+.answer-voting-wrapper{
+    width: fit-content;
+}
+.answer-voting-wrapper .upvoteAnswer,.downvoteAnswer{
+    font-size: 215%;
+}
+.answer-voting-wrapper ol{
+    list-style-type: none;
+}
+.answer-voting-wrapper ol li:nth-child(2){
+    font-size: larger;
+    text-align: center;
+}
