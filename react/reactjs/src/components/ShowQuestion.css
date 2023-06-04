@@ -91,3 +91,16 @@
     color: orange;
     border: 2px solid rgb(205, 134, 2);
 }
+.no-screenshot{
+    margin: 0 auto;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    width: 100% ;
+    background-color: #E7E6E1 !important;
+    border-radius: 8px;
+}
+.no-screenshot img{
+
+    border: 0 !important;
+}

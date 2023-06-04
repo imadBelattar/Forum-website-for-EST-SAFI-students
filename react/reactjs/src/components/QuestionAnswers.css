@@ -1,10 +1,12 @@
 .answer-content{
-    background-color: #ffe7c8;
-    border-radius: 10px;
+    background-color: transparent;
+    color: #294044;
+/*     border-radius: 10px; */
     margin: auto 10%;
     margin-left: 0px;
+    margin-top: 0 !important;
     padding: 20px;
-    padding-top: 20px;
+    padding-top: 10px !important;
 }
 .screenshots-For-answer img{
     max-width: 80% !important;
@@ -13,5 +15,5 @@
 }
 .voting-content{
     display: flex;
-    margin-top: 40px !important;
+    margin-top: 15px !important;
 }

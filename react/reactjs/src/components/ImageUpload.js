@@ -58,13 +58,14 @@ const ImageUpload = ({ selectedImgFiles, setSelectedImgFiles }) => {
       <div className="form-text">
         Up to 3 screenshots{" "}
         <span style={{ color: "red" }}>
-          ( {selectedImgFiles.length} screenshot(s) )
+          ( {selectedImgFiles.length}{" "}
+          {selectedImgFiles.length > 1 ? "screeshots" : "screenshot"} )
         </span>
       </div>
       <img
         className="galleryLogo"
         src={gallery}
-        width="40"
+        width="35"
         onClick={uploaderIconClicked}
       />
       {selectedImgFiles &&

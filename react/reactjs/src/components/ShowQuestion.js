@@ -10,6 +10,8 @@ import BackwardButton from "./BackwardButton";
 import axios from "axios";
 import Creator from "./Creator";
 import QuestionAnswers from "./QuestionAnswers";
+import No_screenshots from "../utils/img/no-screenshots.png";
+import PostAnswer from "./PostAnswer";
 
 const ShowQuestion = () => {
   //states
@@ -94,6 +96,7 @@ const ShowQuestion = () => {
 
   //useEffect hook
   useEffect(() => {
+    console.log("imagesPaths :", imagesPaths);
     displayQuestion();
   }, []);
   //increasing the votes
@@ -154,7 +157,11 @@ const ShowQuestion = () => {
   return (
     <div className="selectedQuestion-wrapper">
       <BackwardButton linkTo={"/questions"} />
-      <Creator creatorName={question_creator} role={"posted this question"} logo_color={"#F97B22"}/>
+      <Creator
+        creatorName={question_creator}
+        role={"posted this question"}
+        logo_color={"#F97B22"}
+      />
       <h4>{question.title}</h4>
       <ul>
         <li>
@@ -190,7 +197,10 @@ const ShowQuestion = () => {
                 }
               />
             </li>
-            <li className="votes-number"> {question.upvotes - question.downvotes} </li>
+            <li className="votes-number">
+              {" "}
+              {question.upvotes - question.downvotes}{" "}
+            </li>
             <li>
               {" "}
               <FaCaretSquareDown
@@ -224,30 +234,38 @@ const ShowQuestion = () => {
       </div>
       <div className="screenshots-For-Question">
         <h5>screenshots :</h5>
-        {imagesPaths.map((imagePath, index) => {
-          return (
-            <div className="img-cover" key={index}>
-              <img
-                src={baseURL + "/" + imagePath}
-                key={index}
-                alt="screenshot"
-              />
-            </div>
-          );
-        })}
+        {imagesPaths.length > 0 &&
+          imagesPaths.map((imagePath, index) => {
+            return (
+              <div className="img-cover" key={index}>
+                <img
+                  src={baseURL + "/" + imagePath}
+                  key={index}
+                  alt="screenshot"
+                />
+              </div>
+            );
+          })}
+        {!imagesPaths.length && (
+          <div className="no-screenshot">
+            <img src={No_screenshots} />
+          </div>
+        )}
       </div>
+
       <hr />
       <div className="Answers-term">
         <h5>Answers :</h5>
       </div>
       <QuestionAnswers answers={questionAnswers} />
+      <PostAnswer/>
       {/* end ************* */}
       <div className="component-before-end"></div>
       {feedback && (
         <Message
           content={feedback}
           type={"primary"}
-          topP={"14%"}
+          topP={"16%"}
           heightP={"80px"}
           setUpdater={setFeedback}
         />

@@ -1,0 +1,21 @@
+.postAnswer-wrapper{
+padding: 0 5% ;
+margin-top: 50px;
+margin-bottom: 100px;
+}
+.postAnswer-wrapper textarea{
+  height: 90px;
+  border: rgba(12, 12, 53, 0.297) 1px solid;
+  border-radius: 0;
+}
+.post-answer-header button{
+  float: right;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+  font-weight: 600;
+}
+.postAnswer-wrapper label{
+  margin-top: 15px;
+}

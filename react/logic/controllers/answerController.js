@@ -66,7 +66,7 @@ const update_answer_votes = async (req, res) => {
         if (!user.upvotedAnswers.includes(answerId)) {
           user.upvotedAnswers.push(answerId);
           answer.upvotes += 1; // Increase upvotes
-          feedback = "Thanks for your feedback, answer upvoted successfully";
+          feedback = "Thanks for your feedback";
         }
         break;
       case "cancel upvoting":
@@ -84,7 +84,7 @@ const update_answer_votes = async (req, res) => {
         if (!user.downvotedAnswers.includes(answerId)) {
           user.downvotedAnswers.push(answerId);
           answer.downvotes += 1; // Increase downvotes
-          feedback = "Thanks for your feedback, answer downvoted successfully";
+          feedback = "Thanks for your feedback";
         }
         break;
       case "cancel downvoting":
@@ -99,7 +99,7 @@ const update_answer_votes = async (req, res) => {
     }
 
     await Promise.all([user.save(), answer.save()]);
-    res.status(200).json({ message: feedback });
+    res.status(200).json({ feedback });
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }

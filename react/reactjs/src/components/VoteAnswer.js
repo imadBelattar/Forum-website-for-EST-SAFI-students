@@ -4,6 +4,7 @@ import { FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
+import Message from "./Message";
 
 const VoteAnswer = ({ answer_id }) => {
   //states
@@ -52,7 +53,7 @@ const VoteAnswer = ({ answer_id }) => {
   };
   //
   const vote_answer_response = (res) => {
-    const feedback = res.data.feedback || "Error occured";
+    const feedback = res.data.feedback|| "Error occured";
     setFeedback(feedback);
   };
   const vote_answer = async (votingType, clicked_button) => {
@@ -140,6 +141,15 @@ const VoteAnswer = ({ answer_id }) => {
           </li>
         </ol>
       </div>
+      {feedback && (
+        <Message
+          content={feedback}
+          type={"success"}
+          topP={"16%"}
+          heightP={"80px"}
+          setUpdater={setFeedback}
+        />
+      )}
     </>
   );
 };

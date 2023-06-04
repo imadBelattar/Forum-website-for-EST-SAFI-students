@@ -3,6 +3,7 @@ import "./QuestionAnswers.css";
 import Creator from "./Creator";
 import { baseURL } from "../utils/constant";
 import VoteAnswer from "./VoteAnswer";
+import { FaPencilAlt } from "react-icons/fa"
 
 const QuestionAnswers = ({ answers }) => {
   //********** functions
@@ -50,6 +51,15 @@ const QuestionAnswers = ({ answers }) => {
           </div>
         );
       })}
+      {answers.length === 0 && (
+        <div style={{display: "flex", justifyContent:"center"}}>
+               <h4 style={{ marginTop: "25px", color: "#FF5403", textAlign: "center" }}>
+          Be the first to answer this question
+        </h4>
+        <FaPencilAlt style={{fontSize:"120%", color:"#FF5403"}}/>   
+        </div>
+
+      )}
     </div>
   );
 };
