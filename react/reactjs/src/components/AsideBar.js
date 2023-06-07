@@ -36,7 +36,9 @@ const AsideBar = ({ name }) => {
           </Link>
         </li>
         <li>
-          <Link to="/userQuestions">
+          <Link
+            to="/userQuestions"
+            className={path === "/userQuestions" ? "side-actived" : ""}>
             <FaCommentAlt className="sidebar-icon" />
             <span>Your questions</span>
           </Link>
@@ -54,17 +56,11 @@ const AsideBar = ({ name }) => {
           </Link>
         </li>
         <li>
-          <Link to="ss">
+          <Link to="">
             <FaBell className="sidebar-icon" />
             <span>notification</span>
           </Link>
         </li>
-        <li>
-          <Link to="/about">
-            <FaExclamationCircle className="sidebar-icon" />
-            <span>about</span>
-          </Link>
-        </li>{" "}
       </ul>
     </div>
   );

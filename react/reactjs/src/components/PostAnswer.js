@@ -12,6 +12,7 @@ const PostAnswer = ({ questionId, reShowQuestion }) => {
   const [selectedImgFiles, setSelectedImgFiles] = useState([]);
   const [content, setContent] = useState("");
   const [postingMessage, setPostingMessage] = useState("");
+  const [content_focused, setContent_focused] = useState(false);
   //**************functions
   const post_answer = async () => {
     if (!content) {
@@ -37,11 +38,10 @@ const PostAnswer = ({ questionId, reShowQuestion }) => {
         formData,
         config
       );
-      setPostingMessage(response.data.message);
-      //retrieving the current question after adding the new answer
-      reShowQuestion();
       setContent("");
       setSelectedImgFiles([]);
+      //retrieving the current question after adding the new answer
+      reShowQuestion();
     } catch (err) {
       if (err.response && err.response.status === 500) {
         setPostingMessage("Error while failed to save the answer");
@@ -56,10 +56,9 @@ const PostAnswer = ({ questionId, reShowQuestion }) => {
             formData,
             config
           );
-          setPostingMessage(retryResponse.data.message);
-          reShowQuestion();
           setContent("");
           setSelectedImgFiles([]);
+          reShowQuestion();
         } catch (err) {
           localStorage.removeItem("token");
           window.location.reload();
@@ -85,7 +84,30 @@ const PostAnswer = ({ questionId, reShowQuestion }) => {
             className="form-control"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            onFocus={() => setContent_focused(true)}
           />
+       { content_focused &&   <div className="post-warning">
+            Thanks for contributing an answer to EST SAFI community !
+            <ul style={{ listStyleType: "initial", fontSize: "90%" }}>
+              <li style={{ marginTop: "10px" }}>
+                Please be sure to answer the question. Provide details and share
+                your research!
+              </li>
+            </ul>
+            <p style={{marginBottom:0}}>but avoid :</p>
+            <div className="steps-to-avoid">
+              <ul>
+                <li>
+                  Asking for help, clarification, or responding to other
+                  answers.
+                </li>
+                <li>
+                  Making statements based on opinion; back them up with
+                  references or personal experience.
+                </li>
+              </ul>
+            </div>
+          </div>}
           <ImageUpload
             selectedImgFiles={selectedImgFiles}
             setSelectedImgFiles={setSelectedImgFiles}

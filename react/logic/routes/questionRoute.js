@@ -7,6 +7,7 @@ const {
   getAllQuestionsByViews,
   selectQuestion,
   updateQuestionvotes,
+  getQuestionsByUser,
 } = require("../controllers/questionsController");
 const verifyJWT = require("../middleware/verifyJWT");
 const { uploadForQuestion } = require("../middleware/multer");
@@ -34,4 +35,5 @@ questionRouter.put(
   verifyJWT,
   updateQuestionvotes
 );
+questionRouter.get("/userQuestions", verifyJWT, getQuestionsByUser);
 module.exports = questionRouter;

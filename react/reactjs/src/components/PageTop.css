@@ -1,0 +1,22 @@
+.top-button-div{
+    background-color: #eaeae5;
+    padding: 10px;   
+    display: flex;
+    text-align: center;
+    align-items: center; 
+    margin-left: 240px !important;
+    border-left: rgb(154, 154, 154) 1px solid;
+}
+.top-button-div .icon{
+margin-top: 2px;
+font-size: 150%;
+margin-right: 5px;
+margin-left: 10px;
+color: #314E52;
+}
+.top-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 120%;
+    
+}

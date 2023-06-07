@@ -64,29 +64,7 @@ const Navbar = () => {
             <LogoutButton logout={logout} />
           </>
         ) : (
-          //else render or return these elements
-          <>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link
-                  className={
-                    path === "/login" ? "nav-link activated" : "nav-link"
-                  }
-                  to="/login">
-                  Sign in
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={
-                    path === "/about" ? "nav-link activated" : "nav-link"
-                  }
-                  to="/about">
-                  About
-                </Link>
-              </li>
-            </ul>
-          </>
+          <></>
         )}
       </div>
     </nav>

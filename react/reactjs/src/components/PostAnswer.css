@@ -19,3 +19,19 @@ margin-bottom: 100px;
 .postAnswer-wrapper label{
   margin-top: 15px;
 }
+.postAnswer-wrapper .post-warning{
+  border: 1px solid green;
+  border-radius: 5px;
+  background-color: rgb(205, 255, 131);
+  margin-top: 20px;
+  padding: 15px;
+}
+.post-warning .steps-to-avoid ul{
+  display:block !important;
+  list-style-type: disc;
+  font-size: 90% !important;
+  margin-top: 12px !important;
+}
+.post-warning .steps-to-avoid ul li{
+  margin-left: initial !important;
+}

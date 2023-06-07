@@ -6,6 +6,7 @@
     padding-top: 40px;
     position: fixed;
     transition: width .3s ease;
+    z-index: 1 !important;
   }
   
   .sidebar-header {

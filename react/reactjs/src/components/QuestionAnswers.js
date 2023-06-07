@@ -59,7 +59,7 @@ const QuestionAnswers = ({ answers }) => {
               color: "#FF5403",
               textAlign: "center",
             }}>
-            Be the first to answer this question
+            No one has answered this question yet
           </h4>
           <FaPencilAlt style={{ fontSize: "120%", color: "#FF5403" }} />
         </div>

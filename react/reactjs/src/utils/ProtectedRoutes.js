@@ -2,7 +2,9 @@ import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import AsideBar from "../components/AsideBar";
+
 import "./ProtectedRoutes.css";
+import PageTop from "../components/PageTop";
 
 const ProtectedRoutes = () => {
   let authToken = Boolean(localStorage.getItem("token"));
@@ -13,9 +15,12 @@ const ProtectedRoutes = () => {
       <div className="underNav">
         <AsideBar name={name} />
         <div className="Outlet-container">
-          <Outlet />
+          <Outlet/>
         </div>
       </div>
+      <PageTop/>
+     
+      
     </>
   ) : (
     <Navigate to="/login" />

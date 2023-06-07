@@ -1,121 +1,61 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import { baseURL } from "../utils/constant";
-import { formatMeasurement } from "../utils/functions";
-import { refreshToken } from "../utils/apiUtils";
+import { baseURL } from "../../utils/constant";
+import { formatMeasurement } from "../../utils/functions";
+import { refreshToken } from "../../utils/apiUtils";
 import { FaCheck } from "react-icons/fa";
-import "./Questions.css";
-const Questions = () => {
+import "./UserQuestions.css";
+const UserQuestions = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
-  const createdAt = useRef(null);
-  const voted = useRef(null);
-  const viewed = useRef(null);
-  //reset button styles
-  const resetButtons = (refs) => {
-    refs.forEach((ref) => {
-      ref.current.style.backgroundColor = "";
-      ref.current.style.color = "";
-    });
-  };
   //style the pressed button
-  const styleButton = (ref) => {
-    ref.current.style.backgroundColor = "gray";
-    ref.current.style.color = "white";
+  const set_token_config = () => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return config;
   };
-  const fetchQuestions = async (sortedBy) => {
-    let endpoint;
-    switch (sortedBy) {
-      case "created at":
-        resetButtons([voted, viewed]);
-        endpoint = "getAllQuestions";
-        styleButton(createdAt);
-        break;
-      case "most voted":
-        resetButtons([createdAt, viewed]);
-        endpoint = "getAllQuestionsByVotes";
-        styleButton(voted);
-        break;
-      case "most viewed":
-        resetButtons([createdAt, voted]);
-        endpoint = "getAllQuestionsByViews";
-        styleButton(viewed);
-        break;
-      default:
-        return;
-    }
-
+  //retrieve the user question from the API
+  const fetchUserQuestion = async () => {
+    const config = set_token_config();
     try {
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await axios.get(`${baseURL}/${endpoint}`, config);
-      setQuestions(response.data);
-    } catch (error) {
-      if (error.response && error.response.status === 403) {
-        const newAccessToken = await refreshToken();
-        localStorage.setItem("token", newAccessToken);
+      const res = await axios.get(`${baseURL}/userQuestions`, config);
+      setQuestions(res.data);
+    } catch (err) {
+      if (err && err.response.status === 403) {
+        const newToken = await refreshToken();
         try {
-          //repeating the original request after obtaining a new access token
-          const retryResponse = await axios.get(`${baseURL}/${endpoint}`, {
-            headers: {
-              Authorization: `Bearer ${newAccessToken}`,
-            },
-          });
-          setQuestions(retryResponse.data);
-        } catch (retryError) {
+          config.headers.Authorization = `Bearer ${newToken}`;
+          const res = await axios.get(`${baseURL}/useQuestions`, config);
+          setQuestions(res.data);
+        } catch (err) {
           localStorage.removeItem("token");
           window.location.reload();
         }
       }
     }
   };
-  useEffect(() => {
-    fetchQuestions("created at");
-  }, [localStorage.getItem("token")]);
-
-  //the function responsible for showing (redirecting to) the question
-  const goToQuestion = async (id) => {
-    localStorage.setItem("increaseViews", 1);
-    navigate(`/showQuestion/${id}`);
+  const goToQuestion = (id) => {
+    navigate("/userQuestions");
   };
+  useEffect(() => {
+    fetchUserQuestion();
+  }, []);
 
   return (
     <div className="questions">
       <div className="questionsHeader">
-        <h3>Top Questions</h3>
+        <h3>your Questions</h3>
+
         <Link to="/addQuestion">
           {" "}
           <button className="btn btn-primary">Add question</button>
         </Link>
-      </div>
-      <div className="QuestionsGroups">
-        <button
-          ref={createdAt}
-          type="button"
-          onClick={() => fetchQuestions("created at")}
-          className="btn btn-outline-secondary info1">
-          created at
-        </button>
-        <button
-          ref={voted}
-          type="button"
-          onClick={() => fetchQuestions("most voted")}
-          className="btn btn-outline-secondary info2">
-          voted
-        </button>
-        <button
-          ref={viewed}
-          type="button"
-          onClick={() => fetchQuestions("most viewed")}
-          className="btn btn-outline-secondary info3">
-          most viewed
-        </button>
       </div>
       <Table className="table" striped>
         <tbody>
@@ -188,4 +128,4 @@ const Questions = () => {
     </div>
   );
 };
-export default Questions;
+export default UserQuestions;

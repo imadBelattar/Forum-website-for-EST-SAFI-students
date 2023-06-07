@@ -26,10 +26,12 @@ const ShowQuestion = () => {
   const [question_creator, setQuestion_creator] = useState("");
   const [questionAnswers, setQuestionAnswers] = useState([]);
   const [doesUserAnswer, setDoesUserAnswer] = useState(false);
+  const [creator_id, setCreator_id] = useState();
   //end of states
+
   const pathSplitted = useLocation().pathname.split("/");
   const shownQuestionID = pathSplitted[pathSplitted.length - 1];
-
+  const currentUserId = localStorage.getItem("currentUserId");
   //functions*******************************
 
   //do stuffs
@@ -55,15 +57,19 @@ const ShowQuestion = () => {
     const resQuestionAnswers = response.data.answers || [];
     setQuestionAnswers(resQuestionAnswers);
     setDoesUserAnswer(response.data.doesUserAnswer);
+    setCreator_id(response.data.question.creator_id);
   };
 
   //display the selected question
   const displayQuestion = async () => {
+    const increaseViews = localStorage.getItem("increaseViews") || false;
+    localStorage.removeItem("increaseViews");
     const id = shownQuestionID;
     const token = localStorage.getItem("token");
     let config = {
       headers: {
         Authorization: `Bearer ${token}`,
+        "increase-views": increaseViews,
       },
     };
     try {
@@ -80,13 +86,13 @@ const ShowQuestion = () => {
         //re-provide the new access token within the config options of the request
         config.headers.Authorization = `Bearer ${newAccessToken}`;
         try {
-          const RetryResponse = await axios.get(
+          const retryResponse = await axios.get(
             `${baseURL}/selectQuestion/${id}`,
             config
           );
-          console.log("Retry response : ", RetryResponse.status);
+          console.log("Retry response : ", retryResponse.status);
           //re-do the stuffs again
-          doStuffs(RetryResponse);
+          doStuffs(retryResponse);
         } catch (RetryErr) {
           localStorage.removeItem("token");
           window.location.reload();
@@ -100,7 +106,18 @@ const ShowQuestion = () => {
     displayQuestion();
   }, []);
   //increasing the votes
-  const increaseVotes = async (vote_typee) => {
+  const increaseVotes = async (vote_typee, clicked_button) => {
+    if (currentUserId && creator_id === currentUserId) {
+      switch (clicked_button) {
+        case "upvoteBtn":
+          setFeedback("You can't upvote your own question !");
+          break;
+        case "downvoteBtn":
+          setFeedback("You can't downvote your own question !");
+          break;
+      }
+      return;
+    }
     let vote_type = vote_typee;
     if (voted && voted === "already upvoted") {
       if (vote_type === "upvote") {
@@ -112,7 +129,6 @@ const ShowQuestion = () => {
         vote_type = "remove downvote";
       }
     }
-    console.log("haaaaaa", vote_type);
     const id = shownQuestionID;
     const token = localStorage.getItem("token");
     let config = {
@@ -158,7 +174,9 @@ const ShowQuestion = () => {
     <div className="selectedQuestion-wrapper">
       <BackwardButton linkTo={"/questions"} />
       <Creator
-        creatorName={question_creator}
+        creatorName={
+          creator_id === currentUserId ? "You have" : question_creator
+        }
         role={"posted this question"}
         logo_color={"#F97B22"}
       />
@@ -189,7 +207,7 @@ const ShowQuestion = () => {
             <li>
               {" "}
               <FaCaretSquareUp
-                onClick={() => increaseVotes("upvote")}
+                onClick={() => increaseVotes("upvote", "upvoteBtn")}
                 className={
                   voted === "already upvoted"
                     ? "vote-icon upvote vote-checked"
@@ -209,7 +227,7 @@ const ShowQuestion = () => {
                     ? "vote-icon downvote vote-checked"
                     : "vote-icon downvote"
                 }
-                onClick={() => increaseVotes("downvote")}
+                onClick={() => increaseVotes("downvote", "downvoteBtn")}
               />
             </li>
           </ol>
@@ -259,7 +277,7 @@ const ShowQuestion = () => {
       </div>
       <QuestionAnswers answers={questionAnswers} />
 
-      {!doesUserAnswer && (
+      {!doesUserAnswer && creator_id !== currentUserId && (
         <PostAnswer
           questionId={shownQuestionID}
           reShowQuestion={displayQuestion}
@@ -270,7 +288,7 @@ const ShowQuestion = () => {
       {feedback && (
         <Message
           content={feedback}
-          type={"primary"}
+          type={creator_id === currentUserId ? "danger" : "primary"}
           topP={"16%"}
           heightP={"80px"}
           setUpdater={setFeedback}

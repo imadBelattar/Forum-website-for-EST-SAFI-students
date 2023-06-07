@@ -2,7 +2,7 @@ const questionModel = require("../models/questionModel");
 const answerModel = require("../models/answerModel");
 const userModel = require("../models/userModel");
 
-//invoked by a HTTP POST request
+//invoked by an HTTP POST request
 const addQuestion = async (req, res) => {
   try {
     // Extract the data from the request body
@@ -86,6 +86,7 @@ const getAllQuestionsByViews = async (req, res) => {
 
 //return a question when the user selected it using the ID
 const selectQuestion = async (req, res) => {
+  const increase = req.headers[`increase-views`];
   try {
     const userId = req.user._id;
     const user = await userModel.findById(userId);
@@ -101,10 +102,16 @@ const selectQuestion = async (req, res) => {
     }
     const question = await questionModel
       .findById(id)
-      .populate("user", "full_name-_id") // Populate the user field with the full_name
+      .populate("user", "full_name") // Populate the user field with the full_name
       .lean(); // Convert the Mongoose document to a plain JavaScript object
     if (!question) {
-      return res.status(404).json({ error: "Question not found", id: id });
+      return res.status(404).json({ error: "Question not found", id });
+    }
+    //to be verified ....
+    if (increase) {
+      const question_views = await questionModel.findById(id);
+      question_views.views++;
+      await question_views.save();
     }
 
     // Find the answers for the question and populate the user field with the full_name
@@ -118,12 +125,14 @@ const selectQuestion = async (req, res) => {
 
     // Prepare the response object with the question and its answers
     const response = {
+      increase,
       voted,
       question: {
         _id: question._id,
         title: question.title,
         description: question.description,
         question_creator: question.user.full_name,
+        creator_id: question.user._id,
         createdAt: question.createdAt,
         updatedAt: question.updatedAt,
         upvotes: question.upvotes,
@@ -148,7 +157,7 @@ const selectQuestion = async (req, res) => {
 };
 
 //I was lazy to create multiple functions to handle the votting process
-//update the votes
+//update the votes function
 const updateQuestionvotes = async (req, res) => {
   const vote_type = req.body.vote_type;
   if (!vote_type) {
@@ -224,6 +233,28 @@ const updateQuestionvotes = async (req, res) => {
     return res.status(500).json({ message: "Internal server error", error });
   }
 };
+//retrieving the questions for a single user
+const getQuestionsByUser = async (req, res) => {
+  try {
+    const userId = req.user._id; // Assuming userId is passed as a parameter
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const questions = await questionModel
+      .find({ user: userId })
+      .sort({ createdAt: -1 }); // Sort by createdAt field in descending order (latest first)
+
+    return res.status(200).json(questions);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while retrieving the questions" });
+  }
+};
 
 module.exports = {
   addQuestion,
@@ -232,4 +263,5 @@ module.exports = {
   getAllQuestionsByViews,
   selectQuestion,
   updateQuestionvotes,
+  getQuestionsByUser,
 };
