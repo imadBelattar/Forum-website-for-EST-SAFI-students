@@ -14,7 +14,6 @@ const ImageUpload = ({ selectedImgFiles, setSelectedImgFiles }) => {
   const whenImageSelected = (event) => {
     if (selectedImgFiles.length === 3) {
       setScreenshotsMsg("Already selected 3 screenshots");
-      console.log("Already selected 3 screenshots");
       return;
     }
     const files = event.target.files;
@@ -32,7 +31,6 @@ const ImageUpload = ({ selectedImgFiles, setSelectedImgFiles }) => {
 
   const generateSrc = (image) => {
     const src = URL.createObjectURL(image);
-    console.log(src);
     return src;
   };
 

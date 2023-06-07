@@ -10,7 +10,6 @@ const Navbar = () => {
   //extracting the path name
   const location = useLocation();
   const path = location.pathname;
-  console.log(`current path : ${path}`);
   //hanle the logout button onclick event
   const logout = async () => {
     console.log("logout clicked...");

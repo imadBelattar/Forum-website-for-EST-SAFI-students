@@ -4,9 +4,6 @@ const cors = require("cors");
 const userRoutes = require("./routes/userRoute");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-const fs = require("fs");
-const path = require("path");
-const verifyJWT = require("./middleware/verifyJWT");
 
 const app = express();
 
@@ -41,6 +38,7 @@ app.post("*", (req, res) => {
 });
 //using uploads folder as static folder
 app.use("/api/uploads", express.static("uploads"));
+app.use("/api/uploadsForAnswer", express.static("uploads/answers-screenshots"));
 
 console.log(process.env.MONGO_URI);
 mongoose

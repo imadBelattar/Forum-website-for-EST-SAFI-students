@@ -8,7 +8,7 @@ const Message = ({ content, type, setUpdater, heightP, topP }) => {
       //responsible for showing the message component
       //it comes from the parent
       if (setUpdater) setUpdater(null);
-    }, 1850);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);

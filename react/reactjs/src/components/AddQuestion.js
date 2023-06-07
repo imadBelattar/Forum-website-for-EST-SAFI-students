@@ -53,7 +53,7 @@ const AddQuestion = () => {
     formData.append("selectedTags", JSON.stringify(selectedTags));
 
     // Append each image file to the formData
-    selectedImgFiles.forEach((file, index) => {
+    selectedImgFiles.forEach((file) => {
       formData.append("image", file);
     });
 
@@ -103,9 +103,7 @@ const AddQuestion = () => {
 
   return (
     <div className="addquestionContainer">
-      <BackwardButton
-        linkTo={"/questions"}
-      />
+      <BackwardButton linkTo={"/questions"} />
       <h4>Ask a public question</h4>
       <div className="writeQuestion-paragraph">
         <h5>Writing a good question</h5>

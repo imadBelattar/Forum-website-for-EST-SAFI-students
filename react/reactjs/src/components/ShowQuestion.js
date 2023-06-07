@@ -25,6 +25,7 @@ const ShowQuestion = () => {
   const [voted, setVoted] = useState("");
   const [question_creator, setQuestion_creator] = useState("");
   const [questionAnswers, setQuestionAnswers] = useState([]);
+  const [doesUserAnswer, setDoesUserAnswer] = useState(false);
   //end of states
   const pathSplitted = useLocation().pathname.split("/");
   const shownQuestionID = pathSplitted[pathSplitted.length - 1];
@@ -53,6 +54,7 @@ const ShowQuestion = () => {
     setQuestion_creator(creator);
     const resQuestionAnswers = response.data.answers || [];
     setQuestionAnswers(resQuestionAnswers);
+    setDoesUserAnswer(response.data.doesUserAnswer);
   };
 
   //display the selected question
@@ -69,7 +71,6 @@ const ShowQuestion = () => {
         `${baseURL}/selectQuestion/${id}`,
         config
       );
-      console.log(response.status);
       //do the stuffs
       doStuffs(response);
     } catch (err) {
@@ -96,7 +97,6 @@ const ShowQuestion = () => {
 
   //useEffect hook
   useEffect(() => {
-    console.log("imagesPaths :", imagesPaths);
     displayQuestion();
   }, []);
   //increasing the votes
@@ -258,7 +258,13 @@ const ShowQuestion = () => {
         <h5>Answers :</h5>
       </div>
       <QuestionAnswers answers={questionAnswers} />
-      <PostAnswer/>
+
+      {!doesUserAnswer && (
+        <PostAnswer
+          questionId={shownQuestionID}
+          reShowQuestion={displayQuestion}
+        />
+      )}
       {/* end ************* */}
       <div className="component-before-end"></div>
       {feedback && (

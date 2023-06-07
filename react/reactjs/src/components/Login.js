@@ -41,10 +41,12 @@ const Login = () => {
         withCredentials: true,
       })
       .then((response) => {
+        localStorage.clear();
         const recievedAccessToken = response.data.accessToken;
         if (recievedAccessToken) {
           localStorage.setItem("token", recievedAccessToken);
           localStorage.setItem("name", response.data.name);
+          localStorage.setItem("currentUserId", response.data.currentUser._id);
           //get redirected to the /Question
           navigate("/questions");
         }

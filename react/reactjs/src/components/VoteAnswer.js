@@ -6,13 +6,14 @@ import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
 import Message from "./Message";
 
-const VoteAnswer = ({ answer_id }) => {
+const VoteAnswer = ({ answer_id, creatorId }) => {
   //states
   //this state shows if is the answer already voted by the user or not
   const [votingType, setVotingType] = useState("");
   const [feedback, setFeedback] = useState("");
   const [votes, setVotes] = useState();
   //end of states
+  const currentUserId = localStorage.getItem("currentUserId");
   //************functions
   const if_response_isvoted = (response) => {
     const vote_type = response.data.vote_type || "";
@@ -53,10 +54,22 @@ const VoteAnswer = ({ answer_id }) => {
   };
   //
   const vote_answer_response = (res) => {
-    const feedback = res.data.feedback|| "Error occured";
+    const feedback = res.data.feedback || "Error occured";
     setFeedback(feedback);
   };
+  //vote answer function
   const vote_answer = async (votingType, clicked_button) => {
+    if (currentUserId && creatorId === currentUserId) {
+      switch (clicked_button) {
+        case "upvoteButton":
+          setFeedback("You can't upvote your own answer !");
+          break;
+        case "downvoteButton":
+          setFeedback("You can't downvote your own answer !");
+          break;
+      }
+      return;
+    }
     let action = "";
     const token = localStorage.getItem("token");
     let config = {
@@ -144,7 +157,7 @@ const VoteAnswer = ({ answer_id }) => {
       {feedback && (
         <Message
           content={feedback}
-          type={"success"}
+          type={feedback.includes("You can't") ? "danger" : "success"}
           topP={"16%"}
           heightP={"80px"}
           setUpdater={setFeedback}

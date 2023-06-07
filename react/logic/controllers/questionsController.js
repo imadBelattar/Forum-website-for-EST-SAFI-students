@@ -23,8 +23,6 @@ const addQuestion = async (req, res) => {
       description,
       tags,
       user: req.user._id,
-      createdAt: new Date(),
-      updatedAt: new Date(),
       answers: [],
       screenshots: imagePaths, // Store the image paths in the question object
     });
@@ -112,8 +110,11 @@ const selectQuestion = async (req, res) => {
     // Find the answers for the question and populate the user field with the full_name
     const answers = await answerModel
       .find({ _id: { $in: question.answers } })
-      .populate("user", "full_name-_id") // Populate the user field with the full_name
+      .populate("user", "full_name") // Populate the user field with the full_name
       .lean(); // Convert the Mongoose documents to plain JavaScript objects
+    const doesUserAnswer = answers.some((answer) =>
+      answer.user._id.equals(userId)
+    );
 
     // Prepare the response object with the question and its answers
     const response = {
@@ -135,6 +136,7 @@ const selectQuestion = async (req, res) => {
         ...answer,
         answer_creator: answer.user.full_name,
       })),
+      doesUserAnswer,
     };
     return res.status(200).json(response);
   } catch (err) {

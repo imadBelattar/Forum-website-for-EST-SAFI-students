@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
 const answerModel = require("../models/answerModel");
+const questionModel = require("../models/questionModel");
 
 const isAnswerVoted = async (req, res) => {
   const userId = req.user._id;
@@ -105,7 +106,44 @@ const update_answer_votes = async (req, res) => {
   }
 };
 
+const postQuestion = async (req, res) => {
+  try {
+    const { content } = req.body;
+    const userId = req.user._id;
+    const { questionId } = req.body;
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "user not found !" });
+    }
+    const question = await questionModel.findById(questionId);
+    if (!question) {
+      return res.status(404).json({ message: "question not found !" });
+    }
+    const images = req.files;
+    const imagesPaths = [];
+
+    for (let i = 0; i < images.length; i++) {
+      const path = images[i].path;
+      imagesPaths.push(path);
+    }
+    const answer = new answerModel({
+      content,
+      user: userId,
+      screenshots: imagesPaths,
+    });
+    const savedAnswer = await answer.save();
+    question.answers.push(savedAnswer._id);
+    await question.save();
+    return res.status(201).json({
+      message: "your answer has been posted successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to save answer", err });
+  }
+};
 module.exports = {
   isAnswerVoted,
   update_answer_votes,
+  postQuestion,
 };

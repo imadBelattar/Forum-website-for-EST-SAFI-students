@@ -6,7 +6,8 @@ import {
   FaCommentAlt,
   FaUserCircle,
   FaUserLock,
-  FaClipboardCheck
+  FaClipboardCheck,
+  FaBell,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
@@ -53,11 +54,17 @@ const AsideBar = ({ name }) => {
           </Link>
         </li>
         <li>
+          <Link to="ss">
+            <FaBell className="sidebar-icon" />
+            <span>notification</span>
+          </Link>
+        </li>
+        <li>
           <Link to="/about">
             <FaExclamationCircle className="sidebar-icon" />
             <span>about</span>
           </Link>
-        </li>
+        </li>{" "}
       </ul>
     </div>
   );

@@ -1,6 +1,6 @@
 //formating the question measurements
 function formatMeasurement(measurements) {
-    if(measurements === undefined) return "0"
+  if (measurements === undefined) return "0";
   if (measurements >= 1000000) {
     return (measurements / 1000000).toFixed(1) + "M";
   } else if (measurements >= 1000) {
@@ -9,4 +9,5 @@ function formatMeasurement(measurements) {
     return measurements.toString();
   }
 }
+
 module.exports = { formatMeasurement };

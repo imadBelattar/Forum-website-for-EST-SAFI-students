@@ -18,7 +18,7 @@
     margin-bottom: 20px !important ;
     margin-top: 10px !important;
     padding: 8px;
-    width: 80%;
+    width: fit-content;
 
 }
 .displayedImage img{
