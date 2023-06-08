@@ -2,7 +2,6 @@ import React from "react";
 import "./AsideBar.css";
 import {
   FaComments,
-  FaExclamationCircle,
   FaCommentAlt,
   FaUserCircle,
   FaUserLock,
@@ -38,29 +37,35 @@ const AsideBar = ({ name }) => {
         <li>
           <Link
             to="/userQuestions"
-            className={path === "/userQuestions" ? "side-actived" : ""}>
+            className={
+              path === "/userQuestions" ||
+              path === "/user/addQuestion" ||
+              path.startsWith("/user/showQuestion")
+                ? "side-actived"
+                : ""
+            }>
             <FaCommentAlt className="sidebar-icon" />
-            <span>Your questions</span>
+            <span>My questions</span>
           </Link>
         </li>{" "}
         <li>
-          <Link to="/userAnswers">
+          <Link to="">
             <FaClipboardCheck className="sidebar-icon" />
-            <span>Your Answers</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/changePassword">
-            <FaUserLock className="sidebar-icon" />
-            <span>change password</span>
+            <span>My Answers</span>
           </Link>
         </li>
         <li>
           <Link to="">
+            <FaUserLock className="sidebar-icon" />
+            <span>change password</span>
+          </Link>
+        </li>
+{/*         <li>
+          <Link to="">
             <FaBell className="sidebar-icon" />
             <span>notification</span>
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

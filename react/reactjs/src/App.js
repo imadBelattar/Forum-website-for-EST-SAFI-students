@@ -18,7 +18,9 @@ function App() {
           <Route exact path="/questions" element={<Questions />} />
           <Route exact path="/userQuestions" element={<UserQuestions />} />
           <Route exact path="/addQuestion" element={<AddQuestion />} />
+          <Route exact path="/user/addQuestion" element={<AddQuestion />} />
           <Route path="/showQuestion/:id" element={<ShowQuestion />} />
+          <Route path="user/showQuestion/:id" element={<ShowQuestion />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Unfound />} />

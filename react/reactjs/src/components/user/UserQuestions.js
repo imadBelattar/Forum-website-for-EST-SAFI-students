@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { baseURL } from "../../utils/constant";
@@ -10,6 +10,7 @@ import "./UserQuestions.css";
 const UserQuestions = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
+  const path = useLocation().pathname;
   //style the pressed button
   const set_token_config = () => {
     const token = localStorage.getItem("token");
@@ -40,21 +41,35 @@ const UserQuestions = () => {
       }
     }
   };
-  const goToQuestion = (id) => {
-    navigate("/userQuestions");
-  };
+
+
   useEffect(() => {
     fetchUserQuestion();
   }, []);
-
+  //conserving path when going to add a new question
+  const conserveCurrentPath = () => {
+    if (sessionStorage.getItem("path")) {
+      sessionStorage.removeItem("path");
+    }
+    sessionStorage.setItem("path", path);
+  };
+  //go to question
+  const goToQuestion = (id) => {
+    conserveCurrentPath()
+    navigate(`/user/showQuestion/${id}`);
+  };
   return (
     <div className="questions">
       <div className="questionsHeader">
         <h3>your Questions</h3>
 
-        <Link to="/addQuestion">
+        <Link to="/user/addQuestion">
           {" "}
-          <button className="btn btn-primary">Add question</button>
+          <button
+            className="btn btn-primary"
+            onClick={conserveCurrentPath}>
+            Add question
+          </button>
         </Link>
       </div>
       <Table className="table" striped>

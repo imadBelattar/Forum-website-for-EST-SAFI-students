@@ -14,6 +14,7 @@ import No_screenshots from "../utils/img/no-screenshots.png";
 import PostAnswer from "./PostAnswer";
 
 const ShowQuestion = () => {
+  const path = sessionStorage.getItem("path") || ""
   //states
   const [question, setQuestion] = useState({});
   const [Asked_in, setAsked_in] = useState(0);
@@ -172,7 +173,7 @@ const ShowQuestion = () => {
   };
   return (
     <div className="selectedQuestion-wrapper">
-      <BackwardButton linkTo={"/questions"} />
+      <BackwardButton linkTo={path} />
       <Creator
         creatorName={
           creator_id === currentUserId ? "You have" : question_creator
@@ -275,7 +276,9 @@ const ShowQuestion = () => {
       <div className="Answers-term">
         <h5>Answers :</h5>
       </div>
-      <QuestionAnswers answers={questionAnswers} />
+      <QuestionAnswers answers={questionAnswers} questionId={question._id} displayQuestion={displayQuestion} currentUserId={currentUserId}
+        questionCreatorId={question.creator_id}
+      />
 
       {!doesUserAnswer && creator_id !== currentUserId && (
         <PostAnswer

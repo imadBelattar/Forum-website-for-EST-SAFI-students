@@ -142,8 +142,46 @@ const postQuestion = async (req, res) => {
     return res.status(500).json({ error: "Failed to save answer", err });
   }
 };
+const checkAnswer = async (req, res) => {
+  const answerId = req.body.id;
+  const { questionId } = req.body;
+  const { isAccepted } = req.body;
+  if (!isAccepted) {
+    return res.status(500).json({ message: "more information is required !" });
+  }
+  try {
+    const answer = await answerModel.findById(answerId);
+    if (!answer) {
+      return res.status(404).json({ message: "answer not found !" });
+    }
+    const question = await questionModel.findById(questionId);
+    if (!question) {
+      return res.status(404).json({ message: "question not found !" });
+    }
+    if (isAccepted === "accepted") {
+      answer.isAccepted = true;
+      question.isAnswered = true;
+      question.acceptedAnswers++;
+      await answer.save();
+      await question.save();
+      return res.status(201).json({ feedback: "Answer accepted successfully" });
+    } else if (isAccepted === "canceled") {
+      answer.isAccepted = false;
+      if (question.acceptedAnswers > 0) question.acceptedAnswers--;
+      if (question.acceptedAnswers === 0) question.isAnswered = false;
+      await answer.save();
+      await question.save();
+      return res
+        .status(201)
+        .json({ feedback: "You have revoked the acceptance of this answer" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: "internal server error" });
+  }
+};
 module.exports = {
   isAnswerVoted,
   update_answer_votes,
   postQuestion,
+  checkAnswer,
 };

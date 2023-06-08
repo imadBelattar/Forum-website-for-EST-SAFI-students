@@ -46,6 +46,10 @@ const questionSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  acceptedAnswers: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const questionModel = mongoose.model("Question", questionSchema, "question");

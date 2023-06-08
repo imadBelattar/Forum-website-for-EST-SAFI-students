@@ -19,9 +19,8 @@ const AddQuestion = () => {
   const [description, setDescription] = useState("");
   const [fieldsRequired, setFieldsRequired] = useState("");
   const [questionCreatedMsg, setQuestionCreatedMsg] = useState("");
-  //just for some tests
-
   //end of all states
+  const path = sessionStorage.getItem("path") || "";
   const resetForm = () => {
     setTitle("");
     setDescription("");
@@ -103,7 +102,7 @@ const AddQuestion = () => {
 
   return (
     <div className="addquestionContainer">
-      <BackwardButton linkTo={"/questions"} />
+      <BackwardButton linkTo={path} />
       <h4>Ask a public question</h4>
       <div className="writeQuestion-paragraph">
         <h5>Writing a good question</h5>

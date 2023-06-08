@@ -24,6 +24,11 @@
 .answer-voting-wrapper .upvoteAnswer,.downvoteAnswer{
     font-size: 215%;
 }
+.accepted-icon{
+    margin-top: 15px;
+    font-size: 205%;
+    color: rgb(2, 87, 2);
+}
 .answer-voting-wrapper ol{
     list-style-type: none;
 }

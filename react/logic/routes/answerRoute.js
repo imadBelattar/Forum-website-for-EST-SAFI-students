@@ -4,6 +4,7 @@ const {
   isAnswerVoted,
   update_answer_votes,
   postQuestion,
+  checkAnswer,
 } = require("../controllers/answerController");
 const verifyJWT = require("../middleware/verifyJWT");
 const { uploadForAnswer } = require("../middleware/multer");
@@ -16,4 +17,5 @@ answerRouter.post(
   uploadForAnswer.array("image", 3),
   postQuestion
 );
+answerRouter.put("/answer/isAccepted", verifyJWT, checkAnswer);
 module.exports = answerRouter;

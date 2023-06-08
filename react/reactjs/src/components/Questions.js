@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
@@ -13,6 +13,7 @@ const Questions = () => {
   const createdAt = useRef(null);
   const voted = useRef(null);
   const viewed = useRef(null);
+  const path = useLocation().pathname;
   //reset button styles
   const resetButtons = (refs) => {
     refs.forEach((ref) => {
@@ -79,8 +80,17 @@ const Questions = () => {
     fetchQuestions("created at");
   }, [localStorage.getItem("token")]);
 
+  const conserveCurrentPath = () => {
+    console.log("before", sessionStorage.getItem("path"));
+    if (sessionStorage.getItem("path")) {
+      sessionStorage.removeItem("path");
+    }
+    sessionStorage.setItem("path", path);
+    console.log("after", sessionStorage.getItem("path"));
+  };
   //the function responsible for showing (redirecting to) the question
-  const goToQuestion = async (id) => {
+  const goToQuestion = (id) => {
+    conserveCurrentPath();
     localStorage.setItem("increaseViews", 1);
     navigate(`/showQuestion/${id}`);
   };
@@ -91,7 +101,9 @@ const Questions = () => {
         <h3>Top Questions</h3>
         <Link to="/addQuestion">
           {" "}
-          <button className="btn btn-primary">Add question</button>
+          <button className="btn btn-primary" onClick={conserveCurrentPath}>
+            Add question
+          </button>
         </Link>
       </div>
       <div className="QuestionsGroups">

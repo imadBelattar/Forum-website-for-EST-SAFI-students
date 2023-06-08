@@ -17,3 +17,15 @@
     display: flex;
     margin-top: 15px !important;
 }
+.answer-checkbox{
+    transform: scale(2.1);
+}
+.answer-checkbox:hover{
+    cursor: pointer;
+}
+.answer .your-answer{
+    margin-top: 20px;
+    margin-bottom: 0 !important;
+    margin-left: 5%;
+    font-weight: 500;
+}

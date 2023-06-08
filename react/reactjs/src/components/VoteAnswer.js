@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./VoteAnswer.css";
-import { FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
+import { FaCaretSquareUp, FaCaretSquareDown, FaCheck } from "react-icons/fa";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
 import { refreshToken } from "../utils/apiUtils";
 import Message from "./Message";
 
-const VoteAnswer = ({ answer_id, creatorId }) => {
+const VoteAnswer = ({ answer_id, creatorId, accepted }) => {
   //states
   //this state shows if is the answer already voted by the user or not
   const [votingType, setVotingType] = useState("");
@@ -152,6 +152,7 @@ const VoteAnswer = ({ answer_id, creatorId }) => {
               onClick={() => vote_answer(votingType, "downvoteButton")}
             />
           </li>
+          { accepted && <li><FaCheck className="accepted-icon"/></li>}
         </ol>
       </div>
       {feedback && (

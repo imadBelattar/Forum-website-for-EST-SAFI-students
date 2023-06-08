@@ -1,5 +1,4 @@
 import "./Navbar.css";
-import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../utils/constant";
 import LogoutButton from "./LogoutButton";
@@ -7,9 +6,6 @@ import EST_SAFI_logo from "../utils/img/EST SAFI LOGO.png";
 import app_logo from "../utils/img/app_logo.png";
 import { FaSearch } from "react-icons/fa";
 const Navbar = () => {
-  //extracting the path name
-  const location = useLocation();
-  const path = location.pathname;
   //hanle the logout button onclick event
   const logout = async () => {
     console.log("logout clicked...");
@@ -18,7 +14,8 @@ const Navbar = () => {
         withCredentials: true,
       });
       if (response.status === 204) {
-        localStorage.removeItem("token");
+        sessionStorage.clear();
+        localStorage.clear();
         window.location.reload();
       }
     } catch (error) {
